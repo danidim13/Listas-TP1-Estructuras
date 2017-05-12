@@ -1,5 +1,5 @@
-#ifndef __ListaBase_H__
-#define __ListaBase_H__
+#ifndef __ListaPlantilla_H__
+#define __ListaPlantilla_H__
 
 template <typename E>
 class Nodo{
