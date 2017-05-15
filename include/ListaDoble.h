@@ -47,7 +47,7 @@ class ListaPos: public ListaPosPlantilla<E> {
 			der_pos_t tmp;
 			while (it != nullptr) {
 				tmp = it;
-				it = Siguiente(it);
+				it = it->sig;
 				delete tmp;
 			}
 			num_elem = 0;
@@ -74,8 +74,30 @@ class ListaPos: public ListaPosPlantilla<E> {
 		};
 
 		void Insertar(pos_t p, E elem) override {
-			//TODO
+			// Caso especial primera
+			der_pos_t p_aux = (der_pos_t)p;
+			if (p_aux == primera) {
+				der_pos_t tmp = new node_t;
+
+				tmp->ant = nullptr;
+				tmp->sig = p_aux;
+				tmp->elemento = elem;
+
+				p_aux->ant = tmp;
+				primera = tmp;
+			} else {
+				der_pos_t tmp = new node_t;
+
+				tmp->ant = p_aux->ant;
+				tmp->sig = p_aux;
+				tmp->elemento = elem;
+
+				(p_aux->ant)->sig = tmp;
+				p_aux->ant = tmp;
+			}
+			num_elem++;
 		};
+
 		void AgregarAlFinal(E elem) override {
 
 			// Si la lista está vacia
