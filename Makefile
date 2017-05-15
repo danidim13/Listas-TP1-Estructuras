@@ -1,5 +1,22 @@
-all:
-	g++ -std=c++11 main.cpp -Wall -I ./include
+CC = g++ -Wall -std=c++11 -g
+inc = ./include
+
+Programa: main.cpp $(wildcard $(inc)/*.h)
+	$(CC) -I $(inc) main.cpp -o Programa
+
+check:
+	$(CC) -I $(inc) -fsyntax-only main.cpp
+
+all: Programa
+
+run: all
+	./Programa
 
 clean:
-	rm -f a.out *.gch
+	rm -f Programa $(inc)/*.gch
+
+.PHONY: check
+.PHONY: all
+.PHONY: clean
+.PHONY: run
+
