@@ -31,7 +31,9 @@ class ListaPos: public ListaPosPlantilla<E> {
 
 		/*! Destructor por defecto.
 		 */
-		virtual ~ListaPos(){};
+		virtual ~ListaPos(){
+			Vaciar();
+		};
 
 		//ListaDoble& operator=(const ListaDoble<E> rhs);
 		//ListaDoble(const ListaDoble &other);
@@ -40,7 +42,18 @@ class ListaPos: public ListaPosPlantilla<E> {
 			return num_elem == 0;
 		};
 
-		void Vaciar() override {};
+		void Vaciar() override {
+			der_pos_t it = primera;
+			der_pos_t tmp;
+			while (it != nullptr) {
+				tmp = it;
+				it = Siguiente(it);
+				delete tmp;
+			}
+			num_elem = 0;
+			primera = nullptr;
+			ultima = nullptr;
+		};
 
 		der_pos_t Primera() override {
 			return primera;
@@ -60,8 +73,10 @@ class ListaPos: public ListaPosPlantilla<E> {
 			return p->elemento;
 		};
 
-		void Insertar(pos_t p, E elem) override {};
-		void AgregarUltimo(E elem) override {
+		void Insertar(pos_t p, E elem) override {
+			//TODO
+		};
+		void AgregarAlFinal(E elem) override {
 
 			// Si la lista está vacia
 			if (num_elem == 0) {
@@ -83,7 +98,6 @@ class ListaPos: public ListaPosPlantilla<E> {
 			num_elem++;
 		};
 
-		//TODO
 		void Borrar(pos_t p) override {
 			// Caso especial, lista con unico elemento
 			if (num_elem == 1){
@@ -111,7 +125,7 @@ class ListaPos: public ListaPosPlantilla<E> {
 			num_elem--;
 		};
 
-		void Modificar(pos_t p, E elem) override {
+		void ModificarElem(pos_t p, E elem) override {
 			p->elemento = elem;
 		};
 
@@ -131,5 +145,30 @@ class ListaPos: public ListaPosPlantilla<E> {
 		int num_elem;
 
 };
+
+/*
+template <typename E>
+class ListaIndex: public ListaIndexPlantilla<E> {
+	public:
+		bool Vacia() override {
+			return num_elem == 0;
+		};
+		void Vaciar() override {};
+		E Recuperar(int i) override {};
+		void Insertar(int i, E elem) override {};
+		void Borrar(int i) override {};
+		void Modificar(int i, E elem) override {};
+		void Intercambiar(int i1, int i2) override {};
+		int NumElem() override {};
+
+	private:
+		typedef NodoDoble<E> node_t;
+		typedef NodoDoble<E>* der_pos_t;
+
+		der_pos_t primera;
+		der_pos_t ultima;
+		int num_elem;
+};
+*/
 
 #endif
