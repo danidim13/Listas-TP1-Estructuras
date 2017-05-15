@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
-#include "ListaPlantilla.h"
-#include "ListaDoble.h"
+#include "include/ListaPlantilla.h"
+#include "include/ListaDoble.h"
 
 using namespace std;
 
@@ -12,11 +12,11 @@ int main(int argc, char *argv[]) {
 	ListaPos<int> L;
 
 	cout << L.NumElem() << endl;
-	L.AgregarUltimo(5);
-	L.AgregarUltimo(-1);
-	L.AgregarUltimo(10);
-	L.AgregarUltimo(69);
-	L.AgregarUltimo(7);
+	L.AgregarAlFinal(5);
+	L.AgregarAlFinal(-1);
+	L.AgregarAlFinal(10);
+	L.AgregarAlFinal(69);
+	L.AgregarAlFinal(7);
 	cout << L.NumElem() << endl;
 
 	cout << "Recorrido desde el primero" << endl;
