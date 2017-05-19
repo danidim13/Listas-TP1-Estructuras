@@ -36,7 +36,10 @@ class ListaPos{
 		};
 
 		pos_t Primera(){
-			return 1;
+			if (num_elem)
+				return 1;
+			else
+				return 0;
 		};
 
 		pos_t Ultima(){
