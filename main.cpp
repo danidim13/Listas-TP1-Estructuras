@@ -7,6 +7,10 @@
 
 using namespace std;
 
+/****************************/
+/* Declaracion de funciones */
+/****************************/
+
 void MenuPrincipal();
 void MenuListaPos();
 void MenuListaIndex();
@@ -20,6 +24,10 @@ typename ListaPos<E>::pos_t BuscarPos(E elem, ListaPos<E> *L);
 int LeerInt();
 string LeerStr();
 void Esperar();
+
+/**********************/
+/* Programa principal */
+/**********************/
 
 int main(int argc, char *argv[]) {
 
@@ -111,6 +119,10 @@ int main(int argc, char *argv[]) {
 	*/
 	return 0;
 }
+
+/****************************/
+/* Funciones para los Menus */
+/****************************/
 
 void MenuPrincipal() {
 	bool exit = false;
