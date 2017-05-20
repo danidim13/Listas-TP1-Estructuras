@@ -1,5 +1,5 @@
-#ifndef __ListaArray_H__
-#define __ListaArray_H__
+#ifndef __LISTAPOS_ARREGLO_H__
+#define __LISTAPOS_ARREGLO_H__
 #include <cstdlib>
 
 /*! Clase que implementa el modelo Lista Posicionada

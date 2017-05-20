@@ -1,5 +1,5 @@
-#ifndef __ListaDoble_H__
-#define __ListaDoble_H__
+#ifndef __LISTAPOS_LDE_H__
+#define __LISTAPOS_LDE_H__
 #include "ListaPlantilla.h"
 
 
@@ -167,30 +167,5 @@ class ListaPos: public ListaPosPlantilla<E> {
 		int num_elem;
 
 };
-
-/*
-template <typename E>
-class ListaIndex: public ListaIndexPlantilla<E> {
-	public:
-		bool Vacia() override {
-			return num_elem == 0;
-		};
-		void Vaciar() override {};
-		E Recuperar(int i) override {};
-		void Insertar(int i, E elem) override {};
-		void Borrar(int i) override {};
-		void Modificar(int i, E elem) override {};
-		void Intercambiar(int i1, int i2) override {};
-		int NumElem() override {};
-
-	private:
-		typedef NodoDoble<E> node_t;
-		typedef NodoDoble<E>* der_pos_t;
-
-		der_pos_t primera;
-		der_pos_t ultima;
-		int num_elem;
-};
-*/
 
 #endif

@@ -1,5 +1,5 @@
-#ifndef __ListaSimple_H__
-#define __ListaSimple_H__
+#ifndef __LISTAPOS_LSE_H__
+#define __LISTAPOS_LSE_H__
 #include "ListaPlantilla.h"
 
 

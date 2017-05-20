@@ -1,5 +1,5 @@
-#ifndef __PILA_H__
-#define __PILA_H__
+#ifndef __PILA_LDE_H__
+#define __PILA_LDE_H__
 
 template <typename E>
 class NodoSimple{

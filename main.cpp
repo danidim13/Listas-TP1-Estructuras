@@ -3,7 +3,7 @@
 #include <string>
 #include <sstream>
 #include "include/ListaPlantilla.h"
-#include "include/ListaArray.h"
+#include "include/ListaPos_Arreglo.h"
 
 using namespace std;
 
