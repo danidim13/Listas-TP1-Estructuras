@@ -3,13 +3,15 @@
 #include <string>
 #include <sstream>
 
+
+
+/* Para cambiar la implementación de los modelos
+ * descomente la línea apropiada
+ */
 #include "include/Listas_LDE.h"
 //#include "include/Listas_LSE.h"
 //#include "include/Listas_Arreglo.h"
 
-//#include "include/ListaPlantilla.h"
-//#include "include/ListaPos_Arreglo.h"
-//#include "include/ListaIndex_Arreglo.h"
 
 using namespace std;
 
@@ -453,6 +455,133 @@ void MenuListaIndex(){
 
 void MenuListaOrd(){
 	cout << "Usted escogio la Lista Ordenada" << endl;
+    ListaOrdenada<int> *L = NULL;
+    //ListaOrdenadaLSE<int> L;
+    bool continuar = true;
+    int opcion;
+    while(continuar)
+    {
+        cout<< "¿Qué acción desea realizar?" <<endl;
+        cout<< "\t0 - Imprimir Lista" <<endl;
+        cout<< "\t1 - Iniciar" <<endl;
+        cout<< "\t2 - Destruir" <<endl;
+        cout<< "\t3 - Vacía" <<endl;
+        cout<< "\t4 - Vaciar" <<endl;
+        cout<< "\t5 - Insertar" <<endl;
+        cout<< "\t6 - Borrar" <<endl;
+        cout<< "\t7 - NumElem" <<endl;
+        cout<< "\t8 - Primero" <<endl;
+        cout<< "\t9 - Ultimo" <<endl;
+        cout<< "\t10 - Siguiente" <<endl;
+        cout<< "\t11 - Anterior" <<endl;
+        cout<< "\t12 - Salir" <<endl;
+
+        cin>> opcion;
+        int s;
+        int i;
+        switch(opcion)
+        {
+        case 0:
+            L->Imprimir();
+            break;
+        case 1:
+            cout << "Iniciando la lista!" << endl;
+			L = new ListaOrdenada<int>();
+
+            Esperar();
+            break;
+        case 2:
+            cout << "Destruyendo la lista!" << endl;
+			if (L)
+				delete L;
+            //L->Destruir();
+            L = NULL;
+            Esperar();
+            break;
+        case 3:
+            if (L->Vacia())
+                cout << "La lista está vacía." << endl;
+            else
+                cout << "La lista no está vacía." << endl;
+            Esperar();
+            break;
+        case 4:
+            cout << "Vaciando la lista..." << endl;
+            L->Vaciar();
+            Esperar();
+            break;
+        case 5:
+            cout << "Indique un elemento para insertar." << endl;
+            cin >> s;
+            L->Insertar(s);
+            Esperar();
+            break;
+        case 6:
+            cout << "Indique un elemento de la lista para borrar." << endl;
+            cin >> i;
+            L->Borrar(i);
+            Esperar();
+            break;
+        case 7:
+            cout << "La lista tiene " << L->NumElem() << " elementos." << endl;
+            Esperar();
+            break;
+        case 8:
+            if(L->Primero()==NULL)
+            {
+                cout << "El primer elemento es: pos_nula" << endl;
+                break;
+            }
+            cout << "El primer elemento es: " << L->Primero() << endl;
+            Esperar();
+            break;
+        case 9:
+            cout << "El último elemento es: " << L->Ultimo() << endl;
+            Esperar();
+            break;
+        case 10:
+            cout << "Indique un elemento de la lista." << endl;
+            cin >> i;
+            if(L->Siguiente(i)== NULL)
+            {
+                cout << "La posición siguiente es pos_nula." << endl;
+            }
+            else
+            {
+                cout << "El elemento siguiente es: " << L->Siguiente(i)<< endl;
+            }
+            Esperar();
+            break;
+        case 11:
+            cout << "Indique un elemento de la lista." << endl;
+            cin >> i;
+            if(L->Anterior(i)== NULL)
+            {
+                cout << "La posición anterior es pos_nula." << endl;
+            }
+            else
+            {
+                cout << "El elemento anterior es: " << L->Anterior(i) << endl;
+            }
+            Esperar();
+            break;
+        case 15:
+            cout << "La lista tiene " << L->NumElem() << " elementos." << endl;
+            Esperar();
+            break;
+        case 12:
+            cout << "Volviendo al menu principal." << endl;
+            continuar = false;
+            Esperar();
+            break;
+        default:
+            cout << "Por favor indique un numero del 0 al 16." << endl;
+            Esperar();
+            break;
+        }
+
+
+    }
 }
 
 void MenuPila(){

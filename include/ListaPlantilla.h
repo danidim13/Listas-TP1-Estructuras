@@ -191,7 +191,7 @@ class ListaOrdPlantilla{
 		 * no hace nada.
 		 * @param elem El elemento a insertar.
 		 */
-		virtual void Agregar(E elem) = 0;
+		virtual void Insertar(E elem) = 0;
 
 		/*! \brief Elimina un elemento de la lista.
 		 * Si el elemento no existe en la lista

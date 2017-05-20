@@ -3,6 +3,7 @@
 
 #include "ListaPos_Arreglo.h"
 #include "ListaIndex_Arreglo.h"
+#include "ListaOrdenada_Array.h"
 #include "Pila_LSE.h"
 
 #endif

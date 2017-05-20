@@ -3,6 +3,7 @@
 
 #include "ListaPos_LSE.h"
 #include "ListaIndex_LSE.h"
+#include "ListaOrdenada_LSE.h"
 #include "Pila_LSE.h"
 
 #endif
