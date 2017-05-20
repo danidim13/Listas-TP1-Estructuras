@@ -96,6 +96,7 @@ public:
         temp2 = temp->siguiente;
         temp->siguiente = temp2->siguiente;
         delete(temp2);
+		num_elem--;
     }
 
     void ModificarElem(int p, E elem)
@@ -159,9 +160,10 @@ public:
         }
         while(n!= NULL)
         {
-            cout << n->elemento << endl;
+            cout << n->elemento << " ";
             n = n->siguiente;
         }
+		cout << endl;
     }
 
 //private:
