@@ -2,9 +2,14 @@
 #include <limits>
 #include <string>
 #include <sstream>
-#include "include/ListaPlantilla.h"
-#include "include/ListaPos_Arreglo.h"
-#include "include/ListaIndex_Arreglo.h"
+
+#include "include/Listas_LDE.h"
+//#include "include/Listas_LSE.h"
+//#include "include/Listas_Arreglo.h"
+
+//#include "include/ListaPlantilla.h"
+//#include "include/ListaPos_Arreglo.h"
+//#include "include/ListaIndex_Arreglo.h"
 
 using namespace std;
 
@@ -16,6 +21,7 @@ void MenuPrincipal();
 void MenuListaPos();
 void MenuListaIndex();
 void MenuListaOrd();
+void MenuPila();
 
 template<typename E>
 void ImprimirLista(ListaPos<E> *L);
@@ -135,8 +141,9 @@ void MenuPrincipal() {
 		cout << "¿Qué tipo de lista desea usar?" << endl;
 		cout << "\t1 - Lista Posicionada" << endl;
 		cout << "\t2 - Lista Indexada" << endl;
-		cout << "\t3 - Lista Indexada" << endl;
-		cout << "\t4 - Salir" << endl;
+		cout << "\t3 - Lista Ordenada" << endl;
+		cout << "\t4 - Pila" << endl;
+		cout << "\t5 - Salir" << endl;
 		op_lista = LeerInt();
 		switch (op_lista) {
 			case 1:
@@ -149,10 +156,13 @@ void MenuPrincipal() {
 				MenuListaOrd();
 				break;
 			case 4:
+				MenuPila();
+				break;
+			case 5:
 				exit = true;
 				break;
 			default:
-				cout << "Debe indicar un número del 1 al 4" << endl;
+				cout << "Debe indicar un número del 1 al 5" << endl;
 		}
 	}
 	cout << "Saliendo del programa" << endl;
@@ -443,6 +453,10 @@ void MenuListaIndex(){
 
 void MenuListaOrd(){
 	cout << "Usted escogio la Lista Ordenada" << endl;
+}
+
+void MenuPila(){
+	cout << "Usted escogio la Pila" << endl;
 }
 
 /***********************************/

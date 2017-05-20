@@ -1,18 +1,18 @@
-#ifndef __PILA_LDE_H__
-#define __PILA_LDE_H__
+#ifndef __PILA_LSE_H__
+#define __PILA_LSE_H__
 
 template <typename E>
-class NodoSimple{
+class NodoSimplePila{
 	public:
 		E elemento;
-		NodoSimple *sig;
-}
+		NodoSimplePila *sig;
+};
 
 template <typename E>
 class Pila{
 	public:
-		typedef NodoSimple<E> node_t;
-		typedef NodoSimple<E>* pos_t;
+		typedef NodoSimplePila<E> node_t;
+		typedef NodoSimplePila<E>* pos_t;
 
 		Pila():tope(nullptr),num_elem(0){};
 		~Pila();
