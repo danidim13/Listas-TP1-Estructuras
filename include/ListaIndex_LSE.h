@@ -1,17 +1,17 @@
-#ifndef LINDEXLSE_H
-#define LINDEXLSE_H
+#ifndef LISTAINDEX_LSE_H
+#define LISTAINDEX_LSE_H
 #include <cstdlib>
 #include <iostream>
 using namespace std;
 
 template <typename E>
-class LIndexLSE
+class ListaIndex
 {
 public:
-    int num_elem=0;
-    LIndexLSE()
+    int num_elem = 0;
+    ListaIndex()
     {
-        cabeza= NULL;
+        cabeza = NULL;
         actual = NULL;
         temporal = NULL;
         //ctor
@@ -30,7 +30,7 @@ public:
         cabeza = NULL;
     };
 
-    virtual ~LIndexLSE()
+    virtual ~ListaIndex()
     {
         Vaciar();
     }
@@ -58,7 +58,7 @@ public:
     void Insertar(int p, E elem)
     {
         nodoPtr n = new Nodo;
-        n ->siguiente = NULL;
+        n->siguiente = NULL;
         n->elemento = elem;
         if(cabeza != NULL) //si hay al menos un elemento
         {
@@ -150,7 +150,7 @@ public:
         return num_elem;
     };
 
-    void imprimir() //efectos de prueba
+    void Imprimir() //efectos de prueba
     {
         nodoPtr n = cabeza;
         if(n==NULL)

@@ -4,6 +4,7 @@
 #include <sstream>
 #include "include/ListaPlantilla.h"
 #include "include/ListaPos_Arreglo.h"
+#include "include/ListaIndex_Arreglo.h"
 
 using namespace std;
 
@@ -332,7 +333,7 @@ void MenuListaPos(){
 
 void MenuListaIndex(){
 	cout << "Usted escogio la Lista Indexada" << endl;
-	ListaIndexArreglo<int> L;
+	ListaIndex<int> *L;
     //LIndexLSE<int> L;
     bool continuar = true;
 	int opcion;
@@ -356,21 +357,22 @@ void MenuListaIndex(){
         int i;
 		switch (opcion) {
 			case 0:
-				L.Imprimir();
+				L->Imprimir();
 				break;
 			case 1:
 				cout << "Iniciando la lista!" << endl;
-
+				L = new ListaIndex<int>();
 				Esperar();
 				break;
 			case 2:
 				cout << "Destruyendo la lista!" << endl;
-				L.Destruir();
-				L = NULL;
+				if (L)
+					delete L;
+				L = nullptr;
 				Esperar();
 				break;
 			case 3:
-				if (L.Vacia())
+				if (L->Vacia())
 					cout << "La lista está vacía." << endl;
 				else
 					cout << "La lista no está vacía." << endl;
@@ -378,14 +380,14 @@ void MenuListaIndex(){
 				break;
 			case 4:
 				cout << "Vaciando la lista..." << endl;
-				L.Vaciar();
+				L->Vaciar();
 				Esperar();
 				break;
 			case 5:
 				cout << "Indique un índice de la lista." << endl;
 				int i;
 				cin >> i;
-				cout << "El elemento es: " << L.Recuperar(i) << endl;
+				cout << "El elemento es: " << L->Recuperar(i) << endl;
 				Esperar();
 				break;
 			case 6:
@@ -394,13 +396,13 @@ void MenuListaIndex(){
                 cin >> p;
 				cout << "Indique un elemento para insertar." << endl;
 				cin >> s;
-				L.Insertar(p, s);
+				L->Insertar(p, s);
 				Esperar();
 				break;
 			case 7:
 				cout << "Indique un indice de la lista." << endl;
 				cin >> i;
-				L.Borrar(i);
+				L->Borrar(i);
 				Esperar();
 				break;
 			case 8:
@@ -409,7 +411,7 @@ void MenuListaIndex(){
 				cout << "Indique un elemento para modificarlo." << endl;
 				int stri;
 				cin >> stri;
-				L.ModificarElem(i, stri);
+				L->ModificarElem(i, stri);
 				Esperar();
 				break;
 			case 9:
@@ -418,12 +420,12 @@ void MenuListaIndex(){
 				cin >> i1;
 				cout << "Indique otro indice de la lista." << endl;
 				cin >> i2;
-				cout << "Intercambiando " << L.Recuperar(i1) << " y " << L.Recuperar(i2) << endl;
-				L.Intercambiar(i1, i2);
+				cout << "Intercambiando " << L->Recuperar(i1) << " y " << L->Recuperar(i2) << endl;
+				L->Intercambiar(i1, i2);
 				Esperar();
 				break;
 			case 10:
-				cout << "La lista tiene " << L.NumElem() << " elementos." << endl;
+				cout << "La lista tiene " << L->NumElem() << " elementos." << endl;
 				Esperar();
 				break;
 			case 11:

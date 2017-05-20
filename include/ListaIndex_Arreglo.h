@@ -1,5 +1,5 @@
-#ifndef LISTAINDEXARREGLO_H
-#define LISTAINDEXARREGLO_H
+#ifndef LISTAINDEX_ARREGLO_H
+#define LISTAINDEX_ARREGLO_H
 #include <cstdlib>
 #include <iostream>
 using namespace std;
@@ -7,29 +7,30 @@ using namespace std;
  * mediante un arreglo de elementos.
  */
 template <typename E>
-class ListaIndexArreglo
+class ListaIndex
 {
 public:
-    int num_elem;
     typedef E node_t;
     typedef int pos_t;
 
     /*! Constructor por defecto.
      */
-    ListaIndexArreglo():array(new node_t[30]), max_elem(30), num_elem(0) {};
-    ListaIndexArreglo(size_t m):array(new node_t[m]), max_elem(m), num_elem(0) {};
+    ListaIndex():array(new node_t[30]), max_elem(30), num_elem(0) {};
+    ListaIndex(size_t m):array(new node_t[m]), max_elem(m), num_elem(0) {};
 
     /*! Destructor por defecto.
      */
-    virtual ~ListaIndexArreglo()
+    virtual ~ListaIndex()
     {
         delete[] array;
     };
 
+	/*
     void Destruir()
     {
         delete[] array;
     }
+	*/
     bool Vacia()
     {
         return num_elem == 0;
@@ -94,7 +95,7 @@ protected:
 private:
     node_t* array;
     size_t max_elem;
-
+	int num_elem;
 };
 
 #endif // LISTAINDEXARREGLO_H
