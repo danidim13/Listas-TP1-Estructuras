@@ -8,9 +8,9 @@
 /* Para cambiar la implementación de los modelos
  * descomente la línea apropiada
  */
-#include "include/Listas_LDE.h"
+//#include "include/Listas_LDE.h"
 //#include "include/Listas_LSE.h"
-//#include "include/Listas_Arreglo.h"
+#include "include/Listas_Arreglo.h"
 
 
 using namespace std;
@@ -199,6 +199,13 @@ void MenuListaPos(){
 		string s;
 		ListaPos<string>::pos_t p;
 		ListaPos<string>::pos_t p2;
+
+		if (!L && (opcion != 1 && opcion != 16)) {
+			cout << "Debe inicializar la lista primero!" << endl;
+			Esperar();
+			continue;
+		}
+
 		switch (opcion) {
 			case 0:
 				ImprimirLista(L);
@@ -206,12 +213,14 @@ void MenuListaPos(){
 				break;
 			case 1:
 				cout << "Iniciando la lista!" << endl;
-				L = new ListaPos<string>();
+				if (!L)
+					L = new ListaPos<string>();
 				Esperar();
 				break;
 			case 2:
 				cout << "Destruyendo la lista!" << endl;
-				delete L;
+				if (L)
+					delete L;
 				L = nullptr;
 				Esperar();
 				break;
@@ -345,7 +354,7 @@ void MenuListaPos(){
 
 void MenuListaIndex(){
 	cout << "Usted escogio la Lista Indexada" << endl;
-	ListaIndex<int> *L;
+	ListaIndex<string> *L = nullptr;
     //LIndexLSE<int> L;
     bool continuar = true;
 	int opcion;
@@ -365,15 +374,22 @@ void MenuListaIndex(){
 		cout << "\t11 - Salir" << endl;
 
 		cin >> opcion;
-		int s;
-        int i;
+		string s;
+        int i, i2;
+
+		if (!L && (opcion != 1 && opcion != 11)) {
+			cout << "Debe inicializar la lista primero!" << endl;
+			Esperar();
+			continue;
+		}
+
 		switch (opcion) {
 			case 0:
 				L->Imprimir();
 				break;
 			case 1:
 				cout << "Iniciando la lista!" << endl;
-				L = new ListaIndex<int>();
+				L = new ListaIndex<string>();
 				Esperar();
 				break;
 			case 2:
@@ -397,43 +413,39 @@ void MenuListaIndex(){
 				break;
 			case 5:
 				cout << "Indique un índice de la lista." << endl;
-				int i;
-				cin >> i;
+				i = LeerInt();
 				cout << "El elemento es: " << L->Recuperar(i) << endl;
 				Esperar();
 				break;
 			case 6:
 				cout << "Indique un indice de la lista." << endl;
-                int p;
-                cin >> p;
+				i = LeerInt();
 				cout << "Indique un elemento para insertar." << endl;
-				cin >> s;
-				L->Insertar(p, s);
+				s = LeerStr();
+				L->Insertar(i, s);
 				Esperar();
 				break;
 			case 7:
 				cout << "Indique un indice de la lista." << endl;
-				cin >> i;
+				i = LeerInt();
 				L->Borrar(i);
 				Esperar();
 				break;
 			case 8:
 				cout << "Indique un indice de la lista." << endl;
-				cin >> i;
+				i = LeerInt();
 				cout << "Indique un elemento para modificarlo." << endl;
-				int stri;
-				cin >> stri;
-				L->ModificarElem(i, stri);
+				s = LeerInt();
+				L->ModificarElem(i, s);
 				Esperar();
 				break;
 			case 9:
-				int i1,i2;
 				cout << "Indique un indice de la lista." << endl;
-				cin >> i1;
+				i = LeerInt();
 				cout << "Indique otro indice de la lista." << endl;
-				cin >> i2;
-				cout << "Intercambiando " << L->Recuperar(i1) << " y " << L->Recuperar(i2) << endl;
-				L->Intercambiar(i1, i2);
+				i2 = LeerInt();
+				cout << "Intercambiando " << L->Recuperar(i) << " y " << L->Recuperar(i2) << endl;
+				L->Intercambiar(i, i2);
 				Esperar();
 				break;
 			case 10:
@@ -455,7 +467,7 @@ void MenuListaIndex(){
 
 void MenuListaOrd(){
 	cout << "Usted escogio la Lista Ordenada" << endl;
-    ListaOrdenada<int> *L = NULL;
+    ListaOrdenada<string> *L = nullptr;
     //ListaOrdenadaLSE<int> L;
     bool continuar = true;
     int opcion;
@@ -476,9 +488,16 @@ void MenuListaOrd(){
         cout<< "\t11 - Anterior" <<endl;
         cout<< "\t12 - Salir" <<endl;
 
-        cin>> opcion;
-        int s;
-        int i;
+        cin >> opcion;
+        string s;
+        string i;
+
+		if (!L && (opcion != 1 && opcion != 12)) {
+			cout << "Debe inicializar la lista primero!" << endl;
+			Esperar();
+			continue;
+		}
+
         switch(opcion)
         {
         case 0:
@@ -486,7 +505,7 @@ void MenuListaOrd(){
             break;
         case 1:
             cout << "Iniciando la lista!" << endl;
-			L = new ListaOrdenada<int>();
+			L = new ListaOrdenada<string>();
 
             Esperar();
             break;
@@ -512,14 +531,14 @@ void MenuListaOrd(){
             break;
         case 5:
             cout << "Indique un elemento para insertar." << endl;
-            cin >> s;
+			s = LeerStr();
             L->Insertar(s);
             Esperar();
             break;
         case 6:
             cout << "Indique un elemento de la lista para borrar." << endl;
-            cin >> i;
-            L->Borrar(i);
+            s = LeerStr();
+            L->Borrar(s);
             Esperar();
             break;
         case 7:
@@ -527,42 +546,35 @@ void MenuListaOrd(){
             Esperar();
             break;
         case 8:
-            if(L->Primero()==NULL)
-            {
-                cout << "El primer elemento es: pos_nula" << endl;
-                break;
-            }
-            cout << "El primer elemento es: " << L->Primero() << endl;
+            if(L->Vacia())
+                cout << "No hay primer elemento" << endl;
+			else
+				cout << "El primer elemento es: " << L->Primero() << endl;
             Esperar();
             break;
         case 9:
-            cout << "El último elemento es: " << L->Ultimo() << endl;
+			if(L->Vacia())
+				cout << "No hay ultimo elemento" << endl;
+			else
+				cout << "El último elemento es: " << L->Ultimo() << endl;
             Esperar();
             break;
         case 10:
             cout << "Indique un elemento de la lista." << endl;
-            cin >> i;
-            if(L->Siguiente(i)== NULL)
-            {
-                cout << "La posición siguiente es pos_nula." << endl;
-            }
+			s = LeerStr();
+            if(L->Ultimo()== s)
+                cout << "No hay posición siguiente." << endl;
             else
-            {
-                cout << "El elemento siguiente es: " << L->Siguiente(i)<< endl;
-            }
+                cout << "El elemento siguiente es: " << L->Siguiente(s) << endl;
             Esperar();
             break;
         case 11:
             cout << "Indique un elemento de la lista." << endl;
-            cin >> i;
-            if(L->Anterior(i)== NULL)
-            {
-                cout << "La posición anterior es pos_nula." << endl;
-            }
+            s = LeerStr();
+            if(L->Primero() == s)
+                cout << "No hay posición anterior." << endl;
             else
-            {
-                cout << "El elemento anterior es: " << L->Anterior(i) << endl;
-            }
+                cout << "El elemento anterior es: " << L->Anterior(s) << endl;
             Esperar();
             break;
         case 15:
@@ -586,8 +598,97 @@ void MenuListaOrd(){
 
 void MenuPila(){
 	cout << "Usted escogio la Pila" << endl;
-}
 
+	Pila<string> *P = nullptr;
+	bool continuar = true;
+	int opcion;
+	while(continuar){
+		cout << "¿Qué acción desea realizar?" << endl;
+		cout << "\t0 - Imprimir Pila" << endl;
+		cout << "\t1 - Iniciar" << endl;
+		cout << "\t2 - Destruir" << endl;
+		cout << "\t3 - Vacía" << endl;
+		cout << "\t4 - Vaciar" << endl;
+		cout << "\t5 - Meter" << endl;
+		cout << "\t6 - Sacar" << endl;
+		cout << "\t7 - Tope" << endl;
+		cout << "\t8 - NumElem" << endl;
+		cout << "\t9 - Salir" << endl;
+		
+		opcion = LeerInt();
+		string s;
+
+		if (!P && (opcion != 1 && opcion != 9 )) {
+			cout << "Debe inicializar la pila primero!" << endl;
+			Esperar();
+			continue;
+		}
+
+		//Pila<string>::pos_t p;
+		switch (opcion) {
+			case 0:
+				P->Imprimir();
+				Esperar();
+				break;
+			case 1:
+				cout << "Iniciando la pila!" << endl;
+				P = new Pila<string>();
+				Esperar();
+				break;
+			case 2:
+				cout << "Destruyendo la pila!" << endl;
+				if (P)
+					delete P;
+				P = nullptr;
+				Esperar();
+				break;
+			case 3:
+				if (P->Vacia())
+					cout << "La pila está vacía." << endl;
+				else
+					cout << "La pila no está vacía." << endl;
+				Esperar();
+				break;
+			case 4:
+				cout << "Vaciando la pila..." << endl;
+				P->Vaciar();
+				Esperar();
+				break;
+			case 5:
+				cout << "Indique un elemento para insertar." << endl;
+				s = LeerStr();
+				P->Meter(s);
+				Esperar();
+				break;
+			case 6:
+				cout << "Sacando el tope de la pila: " << P->Tope() << endl;
+				P->Sacar();
+				Esperar();
+				break;
+			case 7:
+				cout << "El elemento al tope de la pila es: " << P->Tope() << endl;
+				Esperar();
+				break;
+			case 8:
+				cout << "La pila tiene " << P->NumElem() << " elementos." << endl;
+				Esperar();
+				break;
+			case 9:
+				cout << "Volviendo al menu principal." << endl;
+				continuar = false;
+				Esperar();
+				break;
+			default:
+				cout << "Por favor indique un numero del 0 al 9." << endl;
+				Esperar();
+				break;
+		}
+	}
+	if (P) {
+		delete P;
+		P = nullptr;
+	}
+}
 /***********************************/
 /* Utilidades para usar las listas */
 /***********************************/
