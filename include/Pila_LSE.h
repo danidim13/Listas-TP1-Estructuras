@@ -1,6 +1,9 @@
 #ifndef __PILA_LSE_H__
 #define __PILA_LSE_H__
 
+#include <iostream>
+
+using namespace std;
 template <typename E>
 class NodoSimplePila{
 	public:
@@ -15,7 +18,9 @@ class Pila{
 		typedef NodoSimplePila<E>* pos_t;
 
 		Pila():tope(nullptr),num_elem(0){};
-		~Pila();
+		virtual ~Pila(){
+			Vaciar();
+		};
 
 		void Vaciar(){
 			pos_t it = tope;
@@ -54,6 +59,17 @@ class Pila{
 
 		int NumElem(){
 			return num_elem;
+		}
+		void Imprimir(){
+			pos_t it = tope;
+			cout << "Imprimiendo pila desde el tope" << endl;
+			cout << "Tope -> ";
+			while (it != nullptr) {
+				cout << it->elemento << " -> ";
+				it = it->sig;
+			}
+			cout << "FIN";
+			cout << endl;
 		}
 
 	private:
