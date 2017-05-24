@@ -24,10 +24,30 @@ class ListaPos{
 			delete[] array;
 		};
 
-		//ListaSimple& operator=(const ListaSimple<E> rhs);
-		//ListaSimple(const ListaSimple &other);
+		ListaPos& operator=(const ListaPos<E> rhs){
+			if (array)
+				delete[] array;
+			array = new node_t[rhs.max_elem];
+			max_elem = rhs.max_elem;
+
+			for (int i = 0; i < rhs.num_elem; i++) {
+				array[i] = rhs.array[i];
+			}
+			num_elem = rhs.num_elem;
+			return *this;
+		};
+
+		ListaPos(const ListaPos &other){
+			array = new node_t[other.max_elem];
+			max_elem = other.max_elem;
+
+			for (int i = 0; i < other.num_elem; i++) {
+				array[i] = other.array[i];
+			}
+			num_elem = other.num_elem;
+		}
 		
-		bool Vacia(){
+		bool Vacia() const {
 			return num_elem == 0;
 		};
 
@@ -35,32 +55,32 @@ class ListaPos{
 			num_elem = 0;
 		};
 
-		pos_t Primera(){
+		pos_t Primera() const {
 			if (num_elem)
 				return 1;
 			else
 				return 0;
 		};
 
-		pos_t Ultima(){
+		pos_t Ultima() const {
 			return num_elem;
 		};
 
-		pos_t Siguiente(pos_t p){
+		pos_t Siguiente(pos_t p) const {
 			if (p != num_elem)
 				return p + 1;
 			else
 				return 0;
 		};
 
-		pos_t Anterior(pos_t p){
+		pos_t Anterior(pos_t p) const {
 			if (p > 1)
 				return p - 1;
 			else
 				return 0;
 		};
 
-		E Recuperar(pos_t p){
+		E Recuperar(pos_t p) const {
 			return array[p-1];
 		};
 
@@ -100,7 +120,7 @@ class ListaPos{
 			array[p2-1] = tmp;
 		};
 
-		int NumElem(){
+		int NumElem() const {
 			return num_elem;
 		};
 

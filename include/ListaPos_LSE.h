@@ -34,10 +34,30 @@ class ListaPos: public ListaPosPlantilla<E> {
 			Vaciar();
 		};
 
-		//ListaSimple& operator=(const ListaSimple<E> rhs);
-		//ListaSimple(const ListaSimple &other);
+		ListaPos& operator=(const ListaPos<E> rhs){
+			Vaciar();
+			pos_t it = rhs.Primera();
+			while (it) {
+				AgregarAlFinal(rhs.Recuperar(it));
+				it = rhs.Siguiente(it);
+			}
+			return *this;
+		};
+
+		ListaPos(const ListaPos &other){
+			primera = nullptr;
+			ultima = nullptr;
+			num_elem = 0;
+
+			der_pos_t it;
+			it = other.Primera();
+			while (it) {
+				this->AgregarAlFinal(other.Recuperar(it));
+				it = other.Siguiente(it);
+			}
+		};
 		
-		bool Vacia() override {
+		bool Vacia() const override {
 			return num_elem == 0;
 		};
 
@@ -54,19 +74,19 @@ class ListaPos: public ListaPosPlantilla<E> {
 			ultima = nullptr;
 		};
 
-		der_pos_t Primera() override {
+		der_pos_t Primera() const override {
 			return primera;
 		};
 
-		der_pos_t Ultima() override {
+		der_pos_t Ultima() const override {
 			return ultima;
 		};
 
-		der_pos_t Siguiente(pos_t p) override {
+		der_pos_t Siguiente(pos_t p) const override {
 			return ((der_pos_t) p)->sig;
 		};
 
-		der_pos_t Anterior(pos_t p) override {
+		der_pos_t Anterior(pos_t p) const override {
 			der_pos_t it = primera;
 			while (it != nullptr) {
 				if (it->sig == p)
@@ -76,7 +96,7 @@ class ListaPos: public ListaPosPlantilla<E> {
 			return it;
 		};
 
-		E Recuperar(pos_t p) override {
+		E Recuperar(pos_t p) const override {
 			return p->elemento;
 		};
 
@@ -163,7 +183,7 @@ class ListaPos: public ListaPosPlantilla<E> {
 			p2->elemento = tmp;
 		};
 
-		int NumElem() override {
+		int NumElem() const override {
 			return num_elem;
 		};
 

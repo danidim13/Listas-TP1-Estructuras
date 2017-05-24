@@ -25,7 +25,7 @@ class ListaPosPlantilla{
 		/*! \brief Indica si la Lista se encuentra vacía.
 		 * @return Valor booleano.
 		 */
-		virtual bool Vacia() = 0;
+		virtual bool Vacia() const = 0;
 
 		/*! \brief Elimina todos los elementos de la lista.
 		 */
@@ -34,30 +34,30 @@ class ListaPosPlantilla{
 		/*! \brief Retorna la posición del primer elemento.
 		 * @return Variable tipo \c pos_t.
 		 */
-		virtual pos_t Primera() = 0;
+		virtual pos_t Primera() const = 0;
 
 		/*! \brief Retorna la posición del último elemento.
 		 * @return Variable tipo \c pos_t.
 		 */
-		virtual pos_t Ultima() = 0;
+		virtual pos_t Ultima() const = 0;
 
 		/*! \brief Retorna la posición siguiente.
 		 * @param p Una posición dentro de la lista.
 		 * @return Una variable tipo \c pos_t.
 		 */
-		virtual pos_t Siguiente(pos_t p) = 0;
+		virtual pos_t Siguiente(pos_t p) const = 0;
 
 		/*! \brief Retorna la posición anterior.
 		 * @param p Una posición dentro de la lista.
 		 * @return Una variable tipo \c pos_t.
 		 */
-		virtual pos_t Anterior(pos_t p) = 0;
+		virtual pos_t Anterior(pos_t p) const = 0;
 
 		/*! \brief Retorna el elemento de una posición.
 		 * @param p Una posición dentro de la lista.
 		 * @return Una variable tipo \c E.
 		 */
-		virtual E Recuperar(pos_t p) = 0;
+		virtual E Recuperar(pos_t p) const = 0;
 
 		/*! \brief Inserta un elemento en la lista.
 		 * El elemento \p elem se inserta antes de la
@@ -94,7 +94,7 @@ class ListaPosPlantilla{
 		/*! \brief Retorna el número de elementos de la lista.
 		 * @return Una variable de tipo entero.
 		 */
-		virtual int NumElem() = 0;
+		virtual int NumElem() const = 0;
 };
 
 template <typename E>
