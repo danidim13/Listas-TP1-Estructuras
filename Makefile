@@ -9,8 +9,8 @@ check:
 
 all: Programa
 	
-test: prueba.cpp $(wildcard $(inc)/*.h)
-	$(CC) -I $(inc) prueba.cpp -o test
+test: prueba.cpp $(wildcard $(inc)/*.h) source/Algoritmos.cpp
+	$(CC) -I $(inc) source/Algoritmos.cpp prueba.cpp -o test
 
 
 run: all
