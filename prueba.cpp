@@ -2,12 +2,16 @@
 #include <limits>
 #include <string>
 #include <sstream>
-//#include "include/ListaPlantilla.h"
-//
-#include "include/ListaPos_LDE.h"
-#warning "Usando implementacion con doble enlace!"
 
-#include "include/Pila_LSE.h"
+//#include "include/ListaPlantilla.h"
+
+#include "include/Listas_LDE.h"
+#warning "Usando implementacion con LDE!"
+//#include "include/Listas_LSE.h"
+//#warning "Usando implementacion con LSE!"
+//#include "include/Listas_Arreglo.h"
+//#warning "Usando implementacion con arreglo!"
+
 
 #include "Algoritmos.h"
 
@@ -116,7 +120,7 @@ int main(int argc, char *argv[]) {
 	L3.AgregarAlFinal(6);
 	L3.AgregarAlFinal(5);
 	L3.AgregarAlFinal(6);
-	L3.AgregarAlFinal(8);
+	L3.AgregarAlFinal(7);
 
 	cout << "Probando algoritmo Invertir" << endl;
 	L2 = Invertir(L);
@@ -128,9 +132,19 @@ int main(int argc, char *argv[]) {
 	Imprimir(L3);
 	cout << Sublista(L, L3) << endl;
 
-	cout << "Probando algoritmo Doble Bubble" << endl;
+	/*
+	L2.Vaciar();
+	L2.AgregarAlFinal(50);
+	L2.AgregarAlFinal(30);
+	L2.AgregarAlFinal(15);
+	L2.AgregarAlFinal(-3);
+	L2.AgregarAlFinal(22);
+	L2.AgregarAlFinal(-1);
+	L2.AgregarAlFinal(9);
+	*/
+	cout << "Probando algoritmo Burbuja Doble" << endl;
 	Imprimir(L2);
-	BubbleDoble(L2);
+	BurbujaDoble(L2);
 	Imprimir(L2);
 
 	/*
