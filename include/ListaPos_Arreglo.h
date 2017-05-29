@@ -1,6 +1,8 @@
 #ifndef __LISTAPOS_ARREGLO_H__
 #define __LISTAPOS_ARREGLO_H__
 #include <cstdlib>
+#include <stdexcept>
+#include <sstream>
 
 /*! Clase que implementa el modelo Lista Posicionada
  * mediante un arreglo de elementos.
@@ -115,6 +117,12 @@ class ListaPos{
 		};
 
 		void Intercambiar(pos_t p1, pos_t p2){
+			if (!p1 || !p2) {
+				std::ostringstream msg;
+				msg << "Tratando de intercambiar " << p1 << " y " << p2;
+
+				throw std::out_of_range(msg.str());
+			}
 			E tmp = array[p1-1];
 			array[p1-1] = array[p2-1];
 			array[p2-1] = tmp;
