@@ -64,6 +64,8 @@ void BurbujaDoble(ListaPos<E> &L1){
 	while (L1.NumElem() - (2*pasada) >= 0 ){
 
 		//std::cout << "Pasada " << pasada << std::endl;
+
+		// Pasada ascendente
 		bool swap = false;
 		for (int i = 0; i < L1.NumElem() - (2*pasada); i++) {
 			if (L1.Recuperar(it) > L1.Recuperar(sig)) {
@@ -81,6 +83,7 @@ void BurbujaDoble(ListaPos<E> &L1){
 		if (!swap)
 			break;
 
+		// Pasada descendente
 		swap = false;
 		for (int i = 0; i < L1.NumElem() - (2*pasada); i++) {
 			it = L1.Anterior(it);
@@ -102,6 +105,75 @@ void BurbujaDoble(ListaPos<E> &L1){
 template <typename E>
 void SeleccionPila(ListaPos<E> &L){
 
+	Pila<typename ListaPos<E>::pos_t> stack;
+	stack.Meter(L.Primera());
+
+	while (!stack.Vacia()) {
+
+		typename ListaPos<E>::pos_t pos_ini = stack.Tope();
+
+		if (!pos_ini) {
+			stack.Sacar();
+		} else {
+			typename ListaPos<E>::pos_t pos_min, it;
+			pos_min = pos_ini;
+			for (it = pos_ini; it; it = L.Siguiente(it)) {
+				if (L.Recuperar(it) < L.Recuperar(pos_min)) {
+					pos_min = it;
+				}
+			}
+			L.Intercambiar(pos_ini,pos_min);
+			stack.Sacar();
+			stack.Meter(L.Siguiente(pos_ini));
+		}
+	}
+}
+
+
+template <typename E>
+void UnionDesord(ListaPos<E> &L1, ListaPos<E> &L2){
+	typename ListaPos<E>::pos_t it1, it2;
+
+	it2 = L2.Primera();
+	bool repetido;
+	while (it2) {
+		repetido = false;
+		it1 = L1.Primera();
+		while (it1) {
+			if (L1.Recuperar(it1) == L2.Recuperar(it2)){
+				repetido = true;
+				break;
+			}
+			it1 = L1.Siguiente(it1);
+		}
+		if (!repetido) {
+			L1.AgregarAlFinal(L2.Recuperar(it2));
+		}
+		it2 = L2.Siguiente(it2);
+	}
+
+}
+
+template <typename E>
+void Eliminar(ListaPos<E> &L1, ListaPos<E> &L2){
+	typename ListaPos<E>::pos_t it1, it2, tmp;
+
+	it1 = L1.Ultima();
+	it2 = L2.Ultima();
+
+	while (it1 && it2) {
+		if (L1.Recuperar(it1) > L2.Recuperar(it2)){
+			it1 = L1.Anterior(it1);
+		} else if (L1.Recuperar(it1) < L2.Recuperar(it2)) {
+			it2 = L2.Anterior(it2);
+		} else {
+			tmp = it1;
+			it1 = L1.Anterior(it1);
+			L1.Borrar(tmp);
+			it2 = L2.Anterior(it2);
+		}
+
+	}
 }
 
 template <typename E>
@@ -120,4 +192,5 @@ template bool Sublista<int>(ListaPos<int> L1, ListaPos<int> L2);
 template void BurbujaDoble<int>(ListaPos<int> &L1);
 template void Imprimir<int>(ListaPos<int> L);
 template void SeleccionPila<int>(ListaPos<int> &L);
-	
+template void UnionDesord<int>(ListaPos<int> &L1, ListaPos<int> &L2);
+template void Eliminar<int>(ListaPos<int> &L1, ListaPos<int> &L2);

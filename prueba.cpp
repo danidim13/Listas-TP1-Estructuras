@@ -117,7 +117,7 @@ int main(int argc, char *argv[]) {
 	ListaPos<int> L2;
 	ListaPos<int> L3;
 
-	L3.AgregarAlFinal(6);
+	//L3.AgregarAlFinal(6);
 	L3.AgregarAlFinal(5);
 	L3.AgregarAlFinal(6);
 	L3.AgregarAlFinal(7);
@@ -132,7 +132,6 @@ int main(int argc, char *argv[]) {
 	Imprimir(L3);
 	cout << Sublista(L, L3) << endl;
 
-	/*
 	L2.Vaciar();
 	L2.AgregarAlFinal(50);
 	L2.AgregarAlFinal(30);
@@ -141,12 +140,44 @@ int main(int argc, char *argv[]) {
 	L2.AgregarAlFinal(22);
 	L2.AgregarAlFinal(-1);
 	L2.AgregarAlFinal(9);
-	*/
+	/*
 	cout << "Probando algoritmo Burbuja Doble" << endl;
 	Imprimir(L2);
 	BurbujaDoble(L2);
 	Imprimir(L2);
+	*/
 
+	cout << "Probando algoritmo Selección con Pila manual" << endl;
+	Imprimir(L2);
+	SeleccionPila(L2);
+	Imprimir(L2);
+
+	cout << endl;
+
+	cout << "Probando Union"  << endl;
+	cout << "L1:" << endl;
+	Imprimir(L2);
+
+	cout << "L2:" << endl;
+	Imprimir(L3);
+
+	UnionDesord(L2, L3);
+	cout << "L1:" << endl;
+	Imprimir(L2);
+	
+	cout << endl;
+	cout << "Probando Eliminar"  << endl;
+	SeleccionPila(L2);
+	SeleccionPila(L3);
+	cout << "L1:" << endl;
+	Imprimir(L2);
+
+	cout << "L2:" << endl;
+	Imprimir(L3);
+
+	Eliminar(L2, L3);
+	cout << "L1:" << endl;
+	Imprimir(L2);
 	/*
 	cout << "Construyendo copias" << endl;
 	cout << "L1:" << endl;
