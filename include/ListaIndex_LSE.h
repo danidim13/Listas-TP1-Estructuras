@@ -8,12 +8,10 @@ template <typename E>
 class ListaIndex
 {
 public:
-    int num_elem = 0;
     ListaIndex()
     {
+        num_elem = 0;
         cabeza = NULL;
-        actual = NULL;
-        temporal = NULL;
         //ctor
     }
     void Vaciar()
@@ -47,12 +45,12 @@ public:
     virtual E Recuperar(int p)   //debe darse un índice válido
     {
         nodoPtr tmp = cabeza;
-        for(int i=1; i<=p; i++)
+        for(int i=1; i<p; i++)
         {
             tmp = tmp->siguiente;
         }
+        return tmp->elemento;
 
-       // cout << "El elemento en el indice" << p << "es: " << tmp->elemento;
     };
 
     void Insertar(int p, E elem)
@@ -60,6 +58,7 @@ public:
         nodoPtr n = new Nodo;
         n->siguiente = NULL;
         n->elemento = elem;
+        /*
         if(cabeza != NULL) //si hay al menos un elemento
         {
             actual = cabeza;
@@ -77,11 +76,41 @@ public:
             cabeza = n; //si no hay lista se hace n el frente de la lista
             n->anterior = NULL;
         }
+        */
+
+
+        if (num_elem == 0) {
+            // Caso especial lista vacia
+            cabeza = n;
+
+        } else {
+
+            // Caso especial primer elemento
+            if (p == 1) {
+                //cout << "caso especial!" << endl;
+                n->siguiente = cabeza;
+                cabeza = n;
+
+            // Otros casos, se inserta antes del elemento i
+            } else {
+                //cout << "Buscando posicion" << endl;
+                nodoPtr it = cabeza;
+                for (int i = 2; i < p; i++) {
+                    it = it->siguiente;
+                    //cout << "Apuntando a " << it->elemento << endl;
+                }
+                // Aqui it es el nodo anterior al nodo p
+                n->siguiente = it->siguiente;
+                it->siguiente = n;
+            }
+        }
+
         num_elem++;
     }
 
     void Borrar(int p)
     {
+        /*
         nodoPtr temp = cabeza;
         nodoPtr temp2;
         if(p==1)
@@ -96,54 +125,56 @@ public:
         temp2 = temp->siguiente;
         temp->siguiente = temp2->siguiente;
         delete(temp2);
-		num_elem--;
+        */
+
+        nodoPtr tmp; // Nodo que se va a borrar
+
+        if (p == 1) {
+            tmp = cabeza;
+            cabeza = cabeza->siguiente;
+        } else {
+            nodoPtr it = cabeza;
+            for (int i = 2; i < p; i++) {
+                it = it->siguiente;
+            }
+            // it apunta al nodo anterior al que se
+            // va a borrar
+            tmp = it->siguiente;
+            it->siguiente = tmp->siguiente;
+        }
+
+        delete tmp;
+        num_elem--;
     }
 
     void ModificarElem(int p, E elem)
     {
         nodoPtr n = cabeza;
-        if(p==1) cabeza->elemento = elem;
-        else
-        {
-            for(int i=1; i<=p-1; i++)
-            {
+		for(int i=1; i<p; i++)
+		{
                 n = n->siguiente;
-            }
-            n->elemento = elem;
-        }
-       // cout << "El elemento cambiado en el indice es: " << n->elemento << endl;
+		}
+		n->elemento = elem;
     }
+
     void Intercambiar(int p1, int p2)
     {
-        nodoPtr n = cabeza;
-        nodoPtr n2 = cabeza;
-        nodoPtr tmp;
-        tmp->elemento = n->elemento;
 
-        if(p1==1) cabeza->elemento = n2->elemento;
-        else if(p1!=1)
-        {
-            for(int i=1; i<=p1-1; i++)
-            {
-                n = n->siguiente;
-                tmp->elemento = n->elemento;
-               // cout << "primero: " << n->elemento << endl;
-            }
+		nodoPtr it1, it2;
 
+		it1 = cabeza;
+        for (int i=1; i<p1; i++) {
+            it1 = it1->siguiente;
         }
 
-        if(p2==1) cabeza->elemento = n->elemento;
-        else if(p2!=1)
-        {
-            for(int i=1; i<=p2-1; i++)
-            {
-                n2 = n2->siguiente;
-            }
-        }
-        n->elemento = n2->elemento;
-        n2->elemento = tmp->elemento;
-       // cout << "primero: " << n->elemento << endl;
-      //  cout << "segundo: " << n2->elemento << endl;
+		it2 = cabeza;
+        for (int i=1; i<p2; i++) {
+            it2 = it2->siguiente;
+		}
+
+		E tmp = it1->elemento;
+		it1->elemento = it2->elemento;
+		it2->elemento = tmp;
     }
 
     int NumElem()
@@ -158,26 +189,27 @@ public:
         {
             cout<<"La lista esta vacia" << endl;
         }
+
+		else
+			cout << "Recorrido desde el primero" << endl;
+
         while(n!= NULL)
         {
             cout << n->elemento << " ";
             n = n->siguiente;
         }
-		cout << endl;
+        cout << endl;
     }
 
-//private:
+private:
     typedef struct Nodo
     {
         E elemento;
         Nodo* siguiente;
-        Nodo* anterior;
     }* nodoPtr;
 
+    int num_elem;
     nodoPtr cabeza;
-    nodoPtr actual;
-    nodoPtr pos;
-    nodoPtr temporal;
 };
 
 #endif // LINDEXLSE_H

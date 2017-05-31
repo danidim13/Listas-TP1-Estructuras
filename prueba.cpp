@@ -5,10 +5,10 @@
 
 //#include "include/ListaPlantilla.h"
 
-#include "include/Listas_LDE.h"
-#warning "Usando implementacion con LDE!"
-//#include "include/Listas_LSE.h"
-//#warning "Usando implementacion con LSE!"
+//#include "include/Listas_LDE.h"
+//#warning "Usando implementacion con LDE!"
+#include "include/Listas_LSE.h"
+#warning "Usando implementacion con LSE!"
 //#include "include/Listas_Arreglo.h"
 //#warning "Usando implementacion con arreglo!"
 
@@ -41,7 +41,57 @@ void ImprimirReversa(ListaPos<E> L) {
 
 int main(int argc, char *argv[]) {
 
+	ListaIndex<char> Li;
+	cout << "Lista indexada" << endl;
+	Li.Insertar(Li.NumElem()+1,'b');
+	Li.Insertar(Li.NumElem()+1,'c');
+	Li.Insertar(Li.NumElem()+1,'d');
+	Li.Insertar(Li.NumElem()+1,'e');
+	Li.Insertar(1,'a');
+	Li.Insertar(Li.NumElem()+1,'f');
+	Li.Insertar(Li.NumElem()+1,'g');
+	Li.Insertar(Li.NumElem()+1,'h');
+	Li.Imprimir();
+	cout << Li.NumElem() << endl;
+	cout << endl;
 
+	for (int i = 1; i <= Li.NumElem(); i++) {
+		cout << "Elemento " << i << " " << Li.Recuperar(i) << endl;
+	}
+
+	int i = 2;
+	cout << "Moficando elemento " << i << " " << Li.Recuperar(i) << endl;
+	Li.ModificarElem(i,'O');
+	Li.Imprimir();
+	cout << Li.NumElem() << endl;
+	
+
+	int j = Li.NumElem();
+	i = 1;
+	cout << "Intercambiando " << Li.Recuperar(i) << " y " << Li.Recuperar(j) << endl;
+	Li.Intercambiar(i, j);
+	Li.Imprimir();
+
+	Li.Insertar(2, 'x');
+	Li.Borrar(5);
+	Li.Imprimir();
+	cout << Li.NumElem() << endl << endl;
+
+	Li.Borrar(1);
+	Li.Imprimir();
+	cout << Li.NumElem() << endl << endl;
+
+	for (int i = 0; i < 3; i++) {
+		Li.Borrar(Li.NumElem());
+		Li.Imprimir();
+		cout << Li.NumElem() << endl << endl;
+	}
+
+	for (int i = 0 ; i < 2; i++) {
+		Li.Insertar(Li.NumElem()+1,'z' - i);
+		Li.Imprimir();
+		cout << Li.NumElem() << endl << endl;
+	}
 	/*
 	Pila<string> P;
 	P.Meter("uno");
