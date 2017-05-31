@@ -54,7 +54,16 @@ public:
 
     void Insertar(int p, E elem)
     {
-        array[p-1] = elem;
+		int inicio = p-1;
+		E tmp_act = elem;
+		E tmp_sig;
+		for (int i = p-1; i < num_elem; i++) {
+			tmp_sig = array[i];
+			array[i] = tmp_act;
+			tmp_act = tmp_sig;
+
+		}
+		array[num_elem] = tmp_act;
         num_elem++;
     };
 
