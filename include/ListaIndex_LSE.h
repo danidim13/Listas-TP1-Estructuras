@@ -150,31 +150,31 @@ public:
     void ModificarElem(int p, E elem)
     {
         nodoPtr n = cabeza;
-		for(int i=1; i<p; i++)
-		{
+        for(int i=1; i<p; i++)
+        {
                 n = n->siguiente;
-		}
-		n->elemento = elem;
+        }
+        n->elemento = elem;
     }
 
     void Intercambiar(int p1, int p2)
     {
 
-		nodoPtr it1, it2;
+        nodoPtr it1, it2;
 
-		it1 = cabeza;
+        it1 = cabeza;
         for (int i=1; i<p1; i++) {
             it1 = it1->siguiente;
         }
 
-		it2 = cabeza;
+        it2 = cabeza;
         for (int i=1; i<p2; i++) {
             it2 = it2->siguiente;
-		}
+        }
 
-		E tmp = it1->elemento;
-		it1->elemento = it2->elemento;
-		it2->elemento = tmp;
+        E tmp = it1->elemento;
+        it1->elemento = it2->elemento;
+        it2->elemento = tmp;
     }
 
     int NumElem()
@@ -190,8 +190,8 @@ public:
             cout<<"La lista esta vacia" << endl;
         }
 
-		else
-			cout << "Recorrido desde el primero" << endl;
+        else
+            cout << "Recorrido desde el primero" << endl;
 
         while(n!= NULL)
         {
