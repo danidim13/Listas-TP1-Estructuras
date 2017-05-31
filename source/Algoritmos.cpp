@@ -2,16 +2,17 @@
 #include <iostream>
 
 template <typename E>
-ListaPos<E> Invertir(ListaPos<E> L){
-	ListaPos<E> inv;
-	typename ListaPos<E>::pos_t p1;
+void Invertir(ListaPos<E> &L){
+	//ListaPos<E> inv;
+	typename ListaPos<E>::pos_t p1, p2;
 	
-	p1 = L.Ultima();
-	while (p1) {
-		inv.AgregarAlFinal(L.Recuperar(p1));
-		p1 = L.Anterior(p1);
+	p1 = L.Primera();
+	p2 = L.Ultima();
+	for (int i = 0; i < L.NumElem()/2 ; i++) {
+		L.Intercambiar(p1,p2);
+		p1 = L.Siguiente(p1);
+		p2 = L.Anterior(p2);
 	}
-	return inv;
 };
 
 template <typename E>
@@ -158,6 +159,10 @@ template <typename E>
 void Eliminar(ListaPos<E> &L1, ListaPos<E> &L2){
 	typename ListaPos<E>::pos_t it1, it2, tmp;
 
+	// Se itera empezando por el ultimo elemento
+	// porque el operador Borrar invalida cualquier
+	// variable pos_t que apuntaba a un elemento
+	// posterior al que se borró.
 	it1 = L1.Ultima();
 	it2 = L2.Ultima();
 
@@ -187,10 +192,63 @@ void Imprimir(ListaPos<E> L) {
 	std::cout << std::endl;
 }
 
-template ListaPos<int> Invertir<int>(ListaPos<int> L);
+/***********************************/
+/* Algoritmos de la lista indexada */
+/***********************************/
+
+template <typename E>
+void Invertir(ListaIndex<E> &L) {
+
+	int p1 = 1;
+	int p2 = L.NumElem();
+	for (int i = 0; i < L.NumElem()/2; i++) {
+		L.Intercambiar(p1, p2);
+		p1++;
+		p2--;
+	}
+}
+template <typename E>
+bool Sublista(ListaIndex<E> &L1, ListaIndex<E> &L2) {
+	int p1, p2, p1_aux;
+	
+	if (L2.NumElem() == 0)
+		return true;
+
+	for (p1 = 1; p1 <= L1.NumElem(); p1++) {
+
+		p2 = 1;
+		if (L1.Recuperar(p1) == L2.Recuperar(p2)) {
+			bool matching = true;
+			p1_aux = p1;
+			while (matching) {
+				if (p2 > L2.NumElem()) {
+					break;
+				} else if (p1_aux > L1.NumElem()) {
+					matching = false;
+				} else if (L1.Recuperar(p1_aux) != L2.Recuperar(p2)) {
+					matching = false;
+				}
+				p1_aux++;
+				p2++;
+			}
+			if (matching) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+template void Invertir<int>(ListaPos<int> &L);
+template void Invertir<char>(ListaPos<char> &L);
 template bool Sublista<int>(ListaPos<int> L1, ListaPos<int> L2);
 template void BurbujaDoble<int>(ListaPos<int> &L1);
 template void Imprimir<int>(ListaPos<int> L);
 template void SeleccionPila<int>(ListaPos<int> &L);
 template void UnionDesord<int>(ListaPos<int> &L1, ListaPos<int> &L2);
 template void Eliminar<int>(ListaPos<int> &L1, ListaPos<int> &L2);
+
+
+template void Invertir<int>(ListaIndex<int> &L);
+template void Invertir<char>(ListaIndex<char> &L);
+template bool Sublista<int>(ListaIndex<int> &L1, ListaIndex<int> &L2);
