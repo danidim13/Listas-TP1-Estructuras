@@ -20,7 +20,7 @@ void Invertir(ListaPos<E> &L){
 };
 
 template <typename E>
-bool Sublista(ListaPos<E> L1, ListaPos<E> L2){
+bool Sublista(ListaPos<E> &L1, ListaPos<E> &L2){
 	typename ListaPos<E>::pos_t p1, p2, p1_aux;
 	
 	p1 = L1.Primera();
@@ -214,7 +214,7 @@ void Eliminar(ListaPos<E> &L1, ListaPos<E> &L2){
 }
 
 template <typename E>
-void Imprimir(ListaPos<E> L) {
+void Imprimir(ListaPos<E> &L) {
 	//std::cout << "Recorrido desde el primero" << std::endl;
 	typename ListaPos<E>::pos_t pos = L.Primera();
 	while (pos) {
@@ -326,14 +326,74 @@ void Imprimir(ListaIndex<E> &L){
 	cout << endl;
 }
 
+template <typename E>
+void SeleccionPila(ListaIndex<E> &L){
+
+	struct StackFrame {
+		int pos_ini;
+		bool sorted;
+	};
+
+	Pila<StackFrame> stack;
+
+	StackFrame f;
+	f.pos_ini = 1;
+	f.sorted = false;
+
+	stack.Meter(f);
+
+	while (!stack.Vacia()) {
+		// f contiene la informacion de variables
+		// locales a cada llamado recursivo.
+		f = stack.Tope();
+		stack.Sacar();
+
+		if (f.pos_ini > L.NumElem()) {
+			// Condicion de parada: no hay mas elementos
+			// return -> no se vuelve a guardar el frame local
+			//cout << "TOP" << endl;
+			continue;
+		} else {
+			if (!f.sorted) {
+				//cout << "hola! " << f.pos_ini << endl;
+
+				int pos_min, it;
+				pos_min = f.pos_ini;
+				for (it = f.pos_ini; it <= L.NumElem(); it++) {
+					if (L.Recuperar(it) < L.Recuperar(pos_min)) {
+						pos_min = it;
+					}
+				}
+				L.Intercambiar(f.pos_ini,pos_min);
+
+				f.sorted = true;
+				stack.Meter(f);
+				// Se guardan las variable locales
+
+				StackFrame nextCall;
+				nextCall.pos_ini = f.pos_ini+1;
+				nextCall.sorted = false;
+				stack.Meter(nextCall);
+				// Nuevo llamado a la funcion;
+			}
+			else {
+				//cout << "adios! " << f.pos_ini << endl;
+				// return -> No se vuelve a guardar el frame
+				// local, fin del llamado.
+				continue;
+			}
+		}
+	}
+}
+
 /***************************/
 /*** Instancias ListaPos ***/
 /***************************/
 template void Invertir<int>(ListaPos<int> &L);
 template void Invertir<char>(ListaPos<char> &L);
-template bool Sublista<int>(ListaPos<int> L1, ListaPos<int> L2);
+template bool Sublista<int>(ListaPos<int> &L1, ListaPos<int> &L2);
 template void BurbujaDoble<int>(ListaPos<int> &L1);
-template void Imprimir<int>(ListaPos<int> L);
+template void Imprimir<int>(ListaPos<int> &L);
 template void SeleccionPila<int>(ListaPos<int> &L);
 template void UnionDesord<int>(ListaPos<int> &L1, ListaPos<int> &L2);
 template void Eliminar<int>(ListaPos<int> &L1, ListaPos<int> &L2);
@@ -347,3 +407,4 @@ template void Invertir<char>(ListaIndex<char> &L);
 template bool Sublista<int>(ListaIndex<int> &L1, ListaIndex<int> &L2);
 template void BurbujaDoble<int>(ListaIndex<int> &L1);
 template void Imprimir<int>(ListaIndex<int> &L);
+template void SeleccionPila<int>(ListaIndex<int> &L);

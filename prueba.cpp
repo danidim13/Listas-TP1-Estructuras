@@ -340,10 +340,20 @@ int main(int argc, char *argv[]) {
 	cout << "Es sublista? " << (bool)Sublista(L, L2) << endl;
 	cout << endl;
 
+	/*
 	cout << "Probando algoritmo Burbuja Doble" << endl;
 	cout << "L es:" << endl;
 	Imprimir(L);
 	BurbujaDoble(L);
+	cout << "Ordenada:" << endl;
+	Imprimir(L);
+	cout << endl;
+	*/
+
+	cout << "Probando algoritmo Seleccion con Pila" << endl;
+	cout << "L es:" << endl;
+	Imprimir(L);
+	SeleccionPila(L);
 	cout << "Ordenada:" << endl;
 	Imprimir(L);
 	cout << endl;
