@@ -19,7 +19,7 @@ public:
     {
         for (int i = 0; i < num_elem; i++)
         {
-            cout<< array[i]<<endl;
+            cout<< array[i] << " ";
         }
         cout<<endl;
     }
@@ -55,11 +55,51 @@ public:
     void Insertar(E elem)
     {
 
+        //cout << "Insertando " << elem << endl;
         if(num_elem == 0)
         {
             array[0] = elem;
             num_elem++;
+            return;
         }
+        else {
+            // Primero se encuentra la posición
+            // donde iría el nuevo elemento
+            int i_elem = 0;
+            while (i_elem < num_elem && array[i_elem] < elem) {
+                i_elem++;
+            }
+
+            // Si se llego al final de la lista entonces
+            // simplemente se agrega el elemento
+            if (i_elem == num_elem) {
+                array[i_elem] = elem;
+                num_elem++;
+                return;
+            }
+
+            // Se verifica si el elemento es repetido
+            // en ese caso no se hace nada
+            if (array[i_elem] == elem) {
+                return;
+            }
+
+            // En caso contrario hay que correr los
+            // elementos posteriores para que la lista
+            // quede ordenada
+            E tmp_act = elem;
+            E tmp_sig;
+            for (int i = i_elem; i < num_elem; i++) {
+                tmp_sig = array[i];
+                array[i] = tmp_act;
+                tmp_act = tmp_sig;
+            }
+            array[num_elem] = tmp_act;
+            num_elem++;
+            return;
+        }
+
+        /*
         else
         {
             bool repetido = false;
@@ -91,11 +131,39 @@ public:
             }
 
         }
+        */
     }
 
 
     void Borrar(E elem)
     {
+        // Si la lista esta vacía no hay nada que hacer
+        if (num_elem == 0)
+            return;
+
+        // Primero se encuentra la posición
+        // donde iría el elemento
+        int i_elem = 0;
+        while (i_elem < num_elem && array[i_elem] < elem) {
+            i_elem++;
+        }
+
+        // Si se llega al final es que no se encontró elem
+        if (i_elem == num_elem)
+            return;
+
+        // Tampoco se encotró si se llega a un elemento mayor
+        if (array[i_elem] != elem)
+            return;
+
+        // Cuando el elemento existe, se corren todos
+        // los elementos posteriores
+        for (int i = i_elem; i < num_elem-1; i++) {
+            array[i] = array[i+1];
+        }
+        num_elem--;
+
+        /*
         bool repetido = false;
         for(int i=0; i < num_elem; i++)
         {
@@ -121,12 +189,15 @@ public:
             }
             num_elem--;
         }
+        */
 
+        /*
         for (int a = 0; a < num_elem; a++)
         {
             cout<< array[a]<<endl;
         }
         cout<<endl;
+        */
     };
 
 
