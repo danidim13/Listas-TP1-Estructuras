@@ -106,26 +106,54 @@ void BurbujaDoble(ListaPos<E> &L1){
 template <typename E>
 void SeleccionPila(ListaPos<E> &L){
 
-	Pila<typename ListaPos<E>::pos_t> stack;
-	stack.Meter(L.Primera());
+	struct StackFrame {
+		typename ListaPos<E>::pos_t pos_ini;
+		bool sorted;
+	};
+
+	Pila<StackFrame> stack;
+
+	StackFrame f;
+	f.pos_ini = L.Primera();
+	f.sorted = false;
+
+	stack.Meter(f);
 
 	while (!stack.Vacia()) {
+		// f contiene la informacion de variables
+		// locales a cada llamado recursivo.
+		f = stack.Tope();
+		stack.Sacar();
 
-		typename ListaPos<E>::pos_t pos_ini = stack.Tope();
-
-		if (!pos_ini) {
-			stack.Sacar();
+		if (!f.pos_ini) {
+			// Condicion de parada: no hay mas elementos
+			// return -> no se vuelve a guardar el frame local
+			continue;
 		} else {
-			typename ListaPos<E>::pos_t pos_min, it;
-			pos_min = pos_ini;
-			for (it = pos_ini; it; it = L.Siguiente(it)) {
-				if (L.Recuperar(it) < L.Recuperar(pos_min)) {
-					pos_min = it;
+			if (!f.sorted) {
+				typename ListaPos<E>::pos_t pos_min, it;
+				pos_min = f.pos_ini;
+				for (it = f.pos_ini; it; it = L.Siguiente(it)) {
+					if (L.Recuperar(it) < L.Recuperar(pos_min)) {
+						pos_min = it;
+					}
 				}
+				L.Intercambiar(f.pos_ini,pos_min);
+
+				f.sorted = true;
+				stack.Meter(f);
+				// Se guardan las variable locales
+
+				StackFrame nextCall;
+				nextCall.pos_ini = L.Siguiente(f.pos_ini);
+				nextCall.sorted = false;
+				stack.Meter(nextCall);
+				// Nuevo llamado a la funcion;
 			}
-			L.Intercambiar(pos_ini,pos_min);
-			stack.Sacar();
-			stack.Meter(L.Siguiente(pos_ini));
+			else {
+				// return
+				continue;
+			}
 		}
 	}
 }
@@ -183,7 +211,7 @@ void Eliminar(ListaPos<E> &L1, ListaPos<E> &L2){
 
 template <typename E>
 void Imprimir(ListaPos<E> L) {
-	std::cout << "Recorrido desde el primero" << std::endl;
+	//std::cout << "Recorrido desde el primero" << std::endl;
 	typename ListaPos<E>::pos_t pos = L.Primera();
 	while (pos) {
 		std::cout << L.Recuperar(pos) << " ";
