@@ -17,7 +17,7 @@ run: all
 	./Programa
 
 clean:
-	rm -f Programa $(inc)/*.gch test
+	rm -f Programa $(inc)/*.gch test *.o
 
 .PHONY: check
 .PHONY: all
