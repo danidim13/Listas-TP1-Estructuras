@@ -36,7 +36,7 @@ template <typename E>
 void BurbujaDoble(ListaIndex<E> &L1);
 
 template <typename E>
-void Imprimir(ListaIndex<E> L);
+void Imprimir(ListaIndex<E> &L);
 
 template <typename E>
 void SeleccionPila(ListaIndex<E> &L);
