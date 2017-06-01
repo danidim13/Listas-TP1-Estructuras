@@ -17,6 +17,7 @@
 
 using namespace std;
 
+/*
 template <typename E>
 void Imprimir(ListaPos<E> L) {
 	cout << "Recorrido desde el primero" << endl;
@@ -27,6 +28,7 @@ void Imprimir(ListaPos<E> L) {
 	}
 	cout << endl;
 }
+*/
 
 template <typename E>
 void ImprimirReversa(ListaPos<E> L) {
@@ -41,6 +43,94 @@ void ImprimirReversa(ListaPos<E> L) {
 
 int main(int argc, char *argv[]) {
 
+	/*********************************/
+	/*** Pruebas Lista Posicionada ***/
+	/*********************************/
+
+	/*** Pruebas constructor por copia ***/
+
+	/*
+	cout << "Construyendo copias" << endl;
+	cout << "L1:" << endl;
+	Imprimir(L);
+	cout << endl;
+
+	cout << "L2:" << endl;
+	Imprimir(L2);
+	cout << endl;
+
+	cout << "L3:" << endl;
+	Imprimir(L3);
+	cout << endl;
+
+	cout << endl;
+	cout << endl;
+	cout << endl;
+	cout << "Some stuff happened :S xdxd" << endl;
+	pos = L2.Primera();
+	L2.Borrar(pos);
+
+	pos = L3.Primera();
+	pos = L3.Siguiente(pos);
+	L3.Intercambiar(pos, L3.Ultima());
+
+	cout << "L1:" << endl;
+	Imprimir(L);
+	cout << endl;
+
+	cout << "L2:" << endl;
+	Imprimir(L2);
+	cout << endl;
+
+	cout << "L3:" << endl;
+	Imprimir(L3);
+	cout << endl;
+
+	cout << "L1:" << endl;
+	ImprimirReversa(L);
+	cout << endl;
+
+	cout << "L2:" << endl;
+	ImprimirReversa(L2);
+	cout << endl;
+
+	cout << "L3:" << endl;
+	ImprimirReversa(L3);
+	cout << endl;
+	
+
+
+	cout << "Agregando un elemento en el medio de la lista" << endl;
+	pos = L.Siguiente(L.Siguiente(L.Primera()));
+	L.Insertar(pos, 666);
+	cout << L.NumElem() << endl;
+
+	Imprimir(L);
+	ImprimirReversa(L);
+	
+	cout << endl;
+
+	cout << "Ahora borramos una posicion..." << endl;
+
+	pos = L.Primera();
+	pos = L.Siguiente(L.Siguiente(pos));
+	//pos = L.Ultima();
+	cout << "Borrando " << L.Recuperar(pos) << endl;
+	cout << endl;
+	L.Borrar(pos);
+	cout << L.NumElem() << endl;
+
+	Imprimir(L);
+	ImprimirReversa(L);
+	cout << endl;
+
+	*/
+
+	/******************************/
+	/*** Pruebas lista indexada ***/
+	/******************************/
+
+	/*
 	ListaIndex<char> Li;
 	cout << "Lista indexada" << endl;
 	Li.Insertar(Li.NumElem()+1,'b');
@@ -92,6 +182,13 @@ int main(int argc, char *argv[]) {
 		Li.Imprimir();
 		cout << Li.NumElem() << endl << endl;
 	}
+	*/
+
+
+	/**********************/
+	/**** Pruebas Pila ****/
+	/**********************/
+
 	/*
 	Pila<string> P;
 	P.Meter("uno");
@@ -110,32 +207,10 @@ int main(int argc, char *argv[]) {
 	*/
 
 
-	/*
-	cout << "Agregando un elemento en el medio de la lista" << endl;
-	pos = L.Siguiente(L.Siguiente(L.Primera()));
-	L.Insertar(pos, 666);
-	cout << L.NumElem() << endl;
 
-	Imprimir(L);
-	ImprimirReversa(L);
-	
-	cout << endl;
-
-	cout << "Ahora borramos una posicion..." << endl;
-
-	pos = L.Primera();
-	pos = L.Siguiente(L.Siguiente(pos));
-	//pos = L.Ultima();
-	cout << "Borrando " << L.Recuperar(pos) << endl;
-	cout << endl;
-	L.Borrar(pos);
-	cout << L.NumElem() << endl;
-
-	Imprimir(L);
-	ImprimirReversa(L);
-	cout << endl;
-
-	*/
+	/********************************************/
+	/*** Pruebas Algoritmos Lista Posicionada ***/
+	/********************************************/
 
 	ListaPos<int> L;
 	ListaPos<int>::pos_t pos;
@@ -152,36 +227,13 @@ int main(int argc, char *argv[]) {
 	L.AgregarAlFinal(2);
 	L.AgregarAlFinal(5);
 
-	/*
 	L.Insertar(L.Ultima(), -1);
 	L.Insertar(L.Ultima(), 10);
 	L.Insertar(L.Primera(), 69);
 	L.Insertar(L.Primera(), 7);
 	cout << L.NumElem() << endl;
-	*/
 
-	cout << "L es:" << endl;
-	Imprimir(L);
-	ImprimirReversa(L);
-	cout << endl;
 	ListaPos<int> L2;
-	ListaPos<int> L3;
-
-	//L3.AgregarAlFinal(6);
-	L3.AgregarAlFinal(5);
-	L3.AgregarAlFinal(6);
-	L3.AgregarAlFinal(7);
-
-	cout << "Probando algoritmo Invertir" << endl;
-	L2 = Invertir(L);
-	Imprimir(L);
-	Imprimir(L2);
-
-	cout << "Probando algoritmo Sublista" << endl;
-	Imprimir(L);
-	Imprimir(L3);
-	cout << Sublista(L, L3) << endl;
-
 	L2.Vaciar();
 	L2.AgregarAlFinal(50);
 	L2.AgregarAlFinal(30);
@@ -190,93 +242,119 @@ int main(int argc, char *argv[]) {
 	L2.AgregarAlFinal(22);
 	L2.AgregarAlFinal(-1);
 	L2.AgregarAlFinal(9);
+
+	ListaPos<int> L3;
+	L3.AgregarAlFinal(6);
+	L3.AgregarAlFinal(5);
+	L3.AgregarAlFinal(6);
+	L3.AgregarAlFinal(7);
+
+
+	cout << "Probando algoritmo Invertir" << endl;
+	cout << "L:" << endl;
+	Imprimir(L);
+	Invertir(L);
+	Imprimir(L);
+	cout << endl;
+
 	/*
 	cout << "Probando algoritmo Burbuja Doble" << endl;
+	cout << "L:" << endl;
 	Imprimir(L2);
 	BurbujaDoble(L2);
 	Imprimir(L2);
+	cout << endl;
 	*/
 
+
 	cout << "Probando algoritmo Selección con Pila manual" << endl;
+	cout << "L:" << endl;
 	Imprimir(L2);
 	SeleccionPila(L2);
 	Imprimir(L2);
-
 	cout << endl;
 
-	cout << "Probando Union"  << endl;
+
+	cout << "Probando Union para listas desordenadas"  << endl;
 	cout << "L1:" << endl;
 	Imprimir(L2);
-
 	cout << "L2:" << endl;
 	Imprimir(L3);
-
 	UnionDesord(L2, L3);
-	cout << "L1:" << endl;
+	cout << "L1 U L2:" << endl;
 	Imprimir(L2);
-	
 	cout << endl;
-	cout << "Probando Eliminar"  << endl;
+	
+	cout << "Probando Eliminar para listas ordenadas"  << endl;
 	SeleccionPila(L2);
 	SeleccionPila(L3);
 	cout << "L1:" << endl;
 	Imprimir(L2);
-
 	cout << "L2:" << endl;
 	Imprimir(L3);
-
 	Eliminar(L2, L3);
-	cout << "L1:" << endl;
+	cout << "L1 - L2:" << endl;
 	Imprimir(L2);
+	cout << endl;
+
+	/*****************************************/
+	/*** Pruebas Algoritmos Lista Indexada ***/
+	/*****************************************/
+
 	/*
-	cout << "Construyendo copias" << endl;
-	cout << "L1:" << endl;
-	Imprimir(L);
+	ListaIndex<int> L;
+	cout << "Lista indexada" << endl;
+	L.Insertar(L.NumElem()+1,4);
+	L.Insertar(L.NumElem()+1,6);
+	L.Insertar(L.NumElem()+1,5);
+	L.Insertar(L.NumElem()+1,6);
+	L.Insertar(1,1);
+	L.Insertar(L.NumElem()+1,7);
+	L.Insertar(L.NumElem()+1,3);
+	L.Insertar(L.NumElem()+1,2);
+	L.Imprimir();
+	cout << L.NumElem() << endl;
 	cout << endl;
 
-	cout << "L2:" << endl;
-	Imprimir(L2);
-	cout << endl;
 
-	cout << "L3:" << endl;
-	Imprimir(L3);
-	cout << endl;
 
+	cout << "L es:" << endl;
+	//Imprimir(L);
+	L.Imprimir();
+	//ImprimirReversa(L);
 	cout << endl;
-	cout << endl;
-	cout << endl;
-	cout << "Some stuff happened :S xdxd" << endl;
-	pos = L2.Primera();
-	L2.Borrar(pos);
+	ListaIndex<int> L3;
 
-	pos = L3.Primera();
-	pos = L3.Siguiente(pos);
-	L3.Intercambiar(pos, L3.Ultima());
+	L3.Insertar(L3.NumElem()+1,6);
+	L3.Insertar(L3.NumElem()+1,5);
+	L3.Insertar(L3.NumElem()+1,6);
 
-	cout << "L1:" << endl;
-	Imprimir(L);
-	cout << endl;
+	//Imprimir(L);
+	L.Imprimir();
+	cout << "Probando algoritmo Invertir" << endl;
+	Invertir(L);
+	//Imprimir(L);
+	L.Imprimir();
 
-	cout << "L2:" << endl;
-	Imprimir(L2);
-	cout << endl;
+	ListaPos<char> Lc;
+	for (char i = 0; i < 9; i++) {
+		Lc.AgregarAlFinal('a'+i);
+	}
+	Imprimir(Lc);
 
-	cout << "L3:" << endl;
-	Imprimir(L3);
-	cout << endl;
+	cout << "Probando algoritmo Invertir" << endl;
+	Invertir(Lc);
+	Imprimir(Lc);
 
-	cout << "L1:" << endl;
-	ImprimirReversa(L);
-	cout << endl;
+	cout << "Probando algoritmo Sublista" << endl;
+	//Imprimir(L);
+	L.Imprimir();
+	//Imprimir(L3);
+	L3.Imprimir();
+	cout << Sublista(L, L3) << endl;
 
-	cout << "L2:" << endl;
-	ImprimirReversa(L2);
-	cout << endl;
-
-	cout << "L3:" << endl;
-	ImprimirReversa(L3);
-	cout << endl;
 	*/
+
 
 	return 0;
 }
