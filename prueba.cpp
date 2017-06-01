@@ -212,8 +212,10 @@ int main(int argc, char *argv[]) {
 	/*** Pruebas Algoritmos Lista Posicionada ***/
 	/********************************************/
 
+	/*
 	ListaPos<int> L;
 	ListaPos<int>::pos_t pos;
+
 
 	L.AgregarAlFinal(1);
 	L.AgregarAlFinal(4);
@@ -257,14 +259,12 @@ int main(int argc, char *argv[]) {
 	Imprimir(L);
 	cout << endl;
 
-	/*
 	cout << "Probando algoritmo Burbuja Doble" << endl;
 	cout << "L:" << endl;
 	Imprimir(L2);
 	BurbujaDoble(L2);
 	Imprimir(L2);
 	cout << endl;
-	*/
 
 
 	cout << "Probando algoritmo Selección con Pila manual" << endl;
@@ -296,12 +296,12 @@ int main(int argc, char *argv[]) {
 	cout << "L1 - L2:" << endl;
 	Imprimir(L2);
 	cout << endl;
+	*/
 
 	/*****************************************/
 	/*** Pruebas Algoritmos Lista Indexada ***/
 	/*****************************************/
 
-	/*
 	ListaIndex<int> L;
 	cout << "Lista indexada" << endl;
 	L.Insertar(L.NumElem()+1,4);
@@ -312,49 +312,41 @@ int main(int argc, char *argv[]) {
 	L.Insertar(L.NumElem()+1,7);
 	L.Insertar(L.NumElem()+1,3);
 	L.Insertar(L.NumElem()+1,2);
-	L.Imprimir();
+	Imprimir(L);
 	cout << L.NumElem() << endl;
 	cout << endl;
 
 
 
+	ListaIndex<int> L2;
+
+	L2.Insertar(L2.NumElem()+1,6);
+	L2.Insertar(L2.NumElem()+1,5);
+	L2.Insertar(L2.NumElem()+1,6);
+
+	cout << "Probando algoritmo Invertir" << endl;
 	cout << "L es:" << endl;
-	//Imprimir(L);
-	L.Imprimir();
-	//ImprimirReversa(L);
-	cout << endl;
-	ListaIndex<int> L3;
-
-	L3.Insertar(L3.NumElem()+1,6);
-	L3.Insertar(L3.NumElem()+1,5);
-	L3.Insertar(L3.NumElem()+1,6);
-
-	//Imprimir(L);
-	L.Imprimir();
-	cout << "Probando algoritmo Invertir" << endl;
+	Imprimir(L);
 	Invertir(L);
-	//Imprimir(L);
-	L.Imprimir();
-
-	ListaPos<char> Lc;
-	for (char i = 0; i < 9; i++) {
-		Lc.AgregarAlFinal('a'+i);
-	}
-	Imprimir(Lc);
-
-	cout << "Probando algoritmo Invertir" << endl;
-	Invertir(Lc);
-	Imprimir(Lc);
+	cout << "Invertida" << endl;
+	Imprimir(L);
+	cout << endl;
 
 	cout << "Probando algoritmo Sublista" << endl;
-	//Imprimir(L);
-	L.Imprimir();
-	//Imprimir(L3);
-	L3.Imprimir();
-	cout << Sublista(L, L3) << endl;
+	cout << "L1 es:" << endl;
+	Imprimir(L);
+	cout << "L2 es:" << endl;
+	Imprimir(L2);
+	cout << "Es sublista? " << (bool)Sublista(L, L2) << endl;
+	cout << endl;
 
-	*/
-
+	cout << "Probando algoritmo Burbuja Doble" << endl;
+	cout << "L es:" << endl;
+	Imprimir(L);
+	BurbujaDoble(L);
+	cout << "Ordenada:" << endl;
+	Imprimir(L);
+	cout << endl;
 
 	return 0;
 }
