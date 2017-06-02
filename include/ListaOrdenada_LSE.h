@@ -154,6 +154,7 @@ public:
 
     void Borrar(E elem)
     {
+		//cout << "Borrando " << elem << endl;
 		// Lista vacia
 		if (num_elem == 0)
 			return;
@@ -226,7 +227,7 @@ public:
         nodoPtr actual = cabeza;
         while(actual->siguiente != NULL)
         {
-            elUltimo = actual->elemento;
+            //elUltimo = actual->elemento;
             actual = actual->siguiente;
         }
         elUltimo = actual->elemento;
@@ -235,8 +236,7 @@ public:
 
     E Siguiente(E elem)
     {
-        nodoPtr n = new Nodo;
-        n = cabeza;
+        nodoPtr n = cabeza;
         while(n != NULL)
         {
             if(n-> elemento == elem)
@@ -254,9 +254,8 @@ public:
 
     E Anterior(E elem)
     {
-        nodoPtr n = new Nodo;
+        nodoPtr n = cabeza;
 		nodoPtr temporal;
-        n = cabeza;
         while(n != NULL)
         {
             if(n-> elemento == elem)
