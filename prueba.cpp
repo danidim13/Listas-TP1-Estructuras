@@ -30,6 +30,7 @@ void Imprimir(ListaPos<E> L) {
 }
 */
 
+/*
 template <typename E>
 void ImprimirReversa(ListaPos<E> L) {
 	cout << "Recorrido desde el ultimo" << endl;
@@ -40,6 +41,7 @@ void ImprimirReversa(ListaPos<E> L) {
 	}
 	cout << endl;
 }
+*/
 
 int main(int argc, char *argv[]) {
 
@@ -184,6 +186,61 @@ int main(int argc, char *argv[]) {
 	}
 	*/
 
+	/********************************/
+	/**** Pruebas Lista Ordenada ****/
+	/********************************/
+
+	/*
+	ListaOrdenada<int> L, L2, L3;
+
+	//cout << "Intento borrar elemento en lista vacia" << endl;
+	//L.Borrar(999);
+
+	cout << "Insertando elementos" << endl;
+	L.Insertar(-5);
+	L.Insertar(5);
+	L.Insertar(22);
+	L.Insertar(3);
+	L.Insertar(9);
+	L.Insertar(11);
+	L.Imprimir();
+	cout << L.NumElem() << " elementos" << endl;
+	cout << endl;
+
+	cout << "Tratando de insertar elementos repetidos" << endl;
+	L.Insertar(11);
+	L.Insertar(5);
+	L.Imprimir();
+	cout << L.NumElem() << " elementos" << endl;
+	cout << endl;
+
+
+	cout << "Borrando elementos 5, -5, 22 (en ese orden)" << endl;
+	L.Borrar(5);
+	L.Imprimir();
+	cout << L.NumElem() << endl;
+	cout << endl;
+	L.Borrar(-5);
+	L.Imprimir();
+	cout << L.NumElem() << endl;
+	cout << endl;
+	L.Borrar(22);
+	L.Imprimir();
+	cout << L.NumElem() << endl;
+	cout << endl;
+
+	cout << "Agregando elementos -1, 30, 2, 29 (en ese orden)" << endl;
+	L.Insertar(-1);
+	L.Imprimir();
+	L.Insertar(30);
+	L.Imprimir();
+	L.Insertar(2);
+	L.Imprimir();
+	L.Insertar(29);
+	L.Imprimir();
+	cout << L.NumElem() << " elementos" << endl;
+	cout << endl;
+	*/
 
 	/**********************/
 	/**** Pruebas Pila ****/
@@ -302,6 +359,7 @@ int main(int argc, char *argv[]) {
 	/*** Pruebas Algoritmos Lista Indexada ***/
 	/*****************************************/
 
+	/*
 	ListaIndex<int> L;
 	cout << "Lista indexada" << endl;
 	L.Insertar(L.NumElem()+1,4);
@@ -340,7 +398,6 @@ int main(int argc, char *argv[]) {
 	cout << "Es sublista? " << (bool)Sublista(L, L2) << endl;
 	cout << endl;
 
-	/*
 	cout << "Probando algoritmo Burbuja Doble" << endl;
 	cout << "L es:" << endl;
 	Imprimir(L);
@@ -348,7 +405,6 @@ int main(int argc, char *argv[]) {
 	cout << "Ordenada:" << endl;
 	Imprimir(L);
 	cout << endl;
-	*/
 
 	cout << "Probando algoritmo Seleccion con Pila" << endl;
 	cout << "L es:" << endl;
@@ -357,7 +413,55 @@ int main(int argc, char *argv[]) {
 	cout << "Ordenada:" << endl;
 	Imprimir(L);
 	cout << endl;
+	*/
 
+	/*****************************************/
+	/*** Pruebas Algoritmos Lista Ordenada ***/
+	/*****************************************/
+
+	ListaOrdenada<int> L, L2, L3;
+
+	L.Insertar(-5);
+	L.Insertar(5);
+	L.Insertar(22);
+	L.Insertar(3);
+	L.Insertar(9);
+	L.Insertar(11);
+	L.Imprimir();
+	cout << L.NumElem() << endl;
+	cout << endl;
+
+	L2.Insertar(-7);
+	L2.Insertar(2);
+	L2.Insertar(69);
+	L2.Insertar(3);
+	L2.Insertar(11);
+	L2.Insertar(1);
+	L2.Imprimir();
+	cout << L.NumElem() << endl;
+	cout << endl;
+
+
+	/*
+	cout << "Probando algoritmo Copiar" << endl;
+	cout << "L1:" << endl;
+	L.Imprimir();
+	cout << "L2:" << endl;
+	L2.Imprimir();
+	Copiar(L, L2);
+	cout << "Copia de L1 en L2" << endl;
+	L2.Imprimir();
+	*/
+
+
+	cout << "Probando algoritmo Eliminar" << endl;
+	cout << "L1:" << endl;
+	L.Imprimir();
+	cout << "L2:" << endl;
+	L2.Imprimir();
+	Eliminar(L, L2);
+	cout << "L1 - L2: " << endl;
+	L.Imprimir();
 	return 0;
 }
 
