@@ -12,7 +12,6 @@ class ListaOrdenada
 {
 
 public:
-    int num_elem=0;
 
     void Imprimir() //efectos de prueba
     {
@@ -23,19 +22,22 @@ public:
         }
         while(n!= NULL)
         {
-            cout << n->elemento << endl;
+            cout << n->elemento << " ";
             n = n->siguiente;
         }
-    }
+		cout << endl;
+    };
     /* Constructor por defecto.
      */
-    ListaOrdenada()
+    ListaOrdenada(): cabeza(NULL), num_elem(0)
     {
-        cabeza= NULL;
-        actual = NULL;
-        temporal = NULL;
+        //cabeza = NULL;
+        //actual = NULL;
+        //temporal = NULL;
+		//num_elem = 0;
         //ctor
-    }
+		//cout << "construido";
+    };
 
     /* Destructor por defecto.
      */
@@ -47,10 +49,11 @@ public:
     void Destruir()
     {
         Vaciar();
-    }
+    };
 
     void Vaciar()
     {
+		cout << "vaciar" << endl;
         nodoPtr it = cabeza;
         nodoPtr tmp;
         while (it != NULL)
@@ -68,9 +71,70 @@ public:
         return num_elem == 0;
     };
 
-    //Requerimiento: NO PUEDEN INSERTAR ELEMENTOS REPETIDOS.
     void Insertar(E elem)
     {
+		//cout << "Insertando " << elem << endl;
+		// Caso especial lista vacia
+		if (num_elem == 0) {
+			cabeza = new Nodo;
+			cabeza->elemento = elem;
+			cabeza->siguiente = NULL;
+			num_elem++;
+			return;
+		}
+
+		// Se debe buscar la posicion correcta para elem
+		
+		nodoPtr iter = cabeza;
+
+		// Caso especial, insertar al principio
+		if (elem < iter->elemento) {
+			nodoPtr nuevo = new Nodo;
+			nuevo->elemento = elem;
+			nuevo->siguiente = cabeza;
+			cabeza = nuevo;
+			num_elem++;
+			return;
+		}
+
+		// Ojo: el condicional se evalua de izquierda a
+		// derecha (primero se ve que iter no es nulo).
+		// El orden es importante porque sino se daría
+		// un segfault cuando se trata de accesar el 
+		// elemento de iter.
+		while ((iter->siguiente) && (iter->siguiente)->elemento < elem) {
+			iter = iter->siguiente;
+		}
+
+		// En este punto iter apunta al nodo anterior
+		// a donde iria el nuevo elemento 
+		
+		// Insertar al final (iter->sig no existe) o elem no es repetido
+		// De nuevo, el orden del if importa
+		if (!(iter->siguiente) || (iter->siguiente)->elemento != elem) {
+			nodoPtr nuevo = new Nodo;
+			nuevo->elemento = elem;
+			nuevo->siguiente = iter->siguiente;
+			iter->siguiente = nuevo;
+			num_elem++;
+			return;
+		} else {
+			// En caso contrario el elemento ya esta en la lista
+			return;
+		}
+
+		/*
+		nodoPtr nuevo = new Nodo;
+		nuevo->elemento = elem;
+		nuevo->siguiente = iter->siguiente;
+		iter->siguiente = nuevo;
+		num_elem++;
+		return
+		*/
+
+
+		// 
+		/*
         Nodo *n = new Nodo;
         n->elemento = elem;
         Nodo *tmp = cabeza;
@@ -84,11 +148,49 @@ public:
         *tmp2 = n;
         n->siguiente = tmp;
 		num_elem++;
+		*/
     };
     //fuente de info: http://stackoverflow.com/questions/4825030/c-add-to-linked-list-in-sorted-order
 
-    void Borrar(int p)
+    void Borrar(E elem)
     {
+		// Lista vacia
+		if (num_elem == 0)
+			return;
+
+		//
+		if (elem < cabeza->elemento)
+			return;
+
+		// Caso especial primer elemento
+		nodoPtr it = cabeza;
+		if (elem == cabeza->elemento) {
+			cabeza = cabeza->siguiente;
+			delete it;
+			num_elem--;
+			return;
+		}
+
+		while ((it->siguiente) && (it->siguiente)->elemento < elem) {
+			it = it->siguiente;
+		}
+
+		// En este punto it esta en la posicion anterior
+		// a donde deberia estar elem.
+
+		// No se encontró elem
+		if (!(it->siguiente) || (it->siguiente)->elemento != elem) {
+			return;
+		} else {
+			nodoPtr tmp = it->siguiente;
+			it->siguiente = tmp->siguiente;
+			delete tmp;
+			num_elem--;
+			return;
+		}
+
+		/*
+		cout << "borrando" << endl;
         nodoPtr temp = cabeza;
         nodoPtr temp2;
         if(p==1)
@@ -104,6 +206,7 @@ public:
         temp->siguiente = temp2->siguiente;
         delete(temp2);
 		num_elem--;
+		*/
     };
 
     int NumElem()
@@ -120,7 +223,7 @@ public:
     E Ultimo()
     {
         E elUltimo;
-        actual = cabeza;
+        nodoPtr actual = cabeza;
         while(actual->siguiente != NULL)
         {
             elUltimo = actual->elemento;
@@ -152,6 +255,7 @@ public:
     E Anterior(E elem)
     {
         nodoPtr n = new Nodo;
+		nodoPtr temporal;
         n = cabeza;
         while(n != NULL)
         {
@@ -169,18 +273,17 @@ public:
 
     }
 
-//private:
-    typedef struct Nodo
-    {
-        E elemento;
-        Nodo* siguiente;
-        Nodo* tmp;
-    }* nodoPtr;
+private:
+
+	typedef struct Nodo
+	{
+		E elemento;
+		Nodo* siguiente;
+		//Nodo* tmp;
+	}* nodoPtr;
 
     nodoPtr cabeza;
-    nodoPtr actual;
-    nodoPtr pos;
-    nodoPtr temporal;
+    int num_elem;
 };
 
 #endif
