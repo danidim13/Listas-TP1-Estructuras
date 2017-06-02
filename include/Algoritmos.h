@@ -1,8 +1,13 @@
 #ifndef __ALGORITMOS_H__
 #define __ALGORITMOS_H__
+
+//#include "Listas_LSE.h"
 #include "Listas_LSE.h"
 
-// Algoritmos de la lista posicionada
+/******************************************/
+/*** Algoritmos de la lista posicionada ***/
+/******************************************/
+
 template <typename E>
 void Invertir(ListaPos<E> &L);
 
@@ -25,7 +30,9 @@ template <typename E>
 void Eliminar(ListaPos<E> &L1, ListaPos<E> &L2);
 
 
-// Algoritmos de la lista indexada
+/***************************************/
+/*** Algoritmos de la lista indexada ***/
+/***************************************/
 template <typename E>
 void Invertir(ListaIndex<E> &L);
 
@@ -46,5 +53,18 @@ void UnionDesord(ListaIndex<E> &L1, ListaIndex<E> &L2);
 
 template <typename E>
 void Eliminar(ListaIndex<E> &L1, ListaIndex<E> &L2);
+
+/***************************************/
+/*** Algoritmos de la lista ordenada ***/
+/***************************************/
+
+template <typename E>
+void Copiar(ListaOrdenada<E> &L1, ListaOrdenada<E> &L2);
+
+template <typename E>
+void Eliminar(ListaOrdenada<E> &L1, ListaOrdenada<E> &L2);
+
+template <typename E>
+void Interseccion1(ListaOrdenada<E> &L1, ListaOrdenada<E> &L2, ListaOrdenada<E> &L3);
 
 #endif

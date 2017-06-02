@@ -386,6 +386,46 @@ void SeleccionPila(ListaIndex<E> &L){
 	}
 }
 
+/***************************************/
+/*** Algoritmos de la lista ordenada ***/
+/***************************************/
+
+template <typename E>
+void Copiar(ListaOrdenada<E> &L1, ListaOrdenada<E> &L2){
+	L2.Vaciar();
+	if (L1.NumElem() == 0) {
+		return;
+	}
+
+	E elem_actual = L1.Primero();
+	while (true) {
+		L2.Insertar(elem_actual);
+		if (elem_actual == L1.Ultimo()) {
+			break;
+		} else {
+			elem_actual = L1.Siguiente(elem_actual);
+		}
+	}
+}
+
+template <typename E>
+void Eliminar(ListaOrdenada<E> &L1, ListaOrdenada<E> &L2){
+
+	if (L1.Vacia() || L2.Vacia())
+		return;
+
+	E elem2 = L2.Primero();
+	while (true) {
+		//cout << "elem = " << elem2 << endl;
+		L1.Borrar(elem2);
+		if (elem2 == L2.Ultimo() || L1.Vacia()) {
+			break;
+		} else {
+			elem2 = L2.Siguiente(elem2);
+		}
+	}
+}
+
 /***************************/
 /*** Instancias ListaPos ***/
 /***************************/
@@ -408,3 +448,9 @@ template bool Sublista<int>(ListaIndex<int> &L1, ListaIndex<int> &L2);
 template void BurbujaDoble<int>(ListaIndex<int> &L1);
 template void Imprimir<int>(ListaIndex<int> &L);
 template void SeleccionPila<int>(ListaIndex<int> &L);
+
+/********************************/
+/*** Instancias ListaOrdenada ***/
+/********************************/
+template void Copiar<int>(ListaOrdenada<int> &L1, ListaOrdenada<int> &L2);
+template void Eliminar<int>(ListaOrdenada<int> &L1, ListaOrdenada<int> &L2);
