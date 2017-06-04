@@ -53,7 +53,7 @@ public:
 
     void Vaciar()
     {
-		cout << "vaciar" << endl;
+		//cout << "vaciar" << endl;
         nodoPtr it = cabeza;
         nodoPtr tmp;
         while (it != NULL)
