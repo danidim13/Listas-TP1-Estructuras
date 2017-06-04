@@ -2,6 +2,8 @@
 #include <limits>
 #include <string>
 #include <sstream>
+#include <cstdlib>
+#include <ctime>
 
 //#include "include/ListaPlantilla.h"
 
@@ -44,6 +46,8 @@ void ImprimirReversa(ListaPos<E> L) {
 */
 
 int main(int argc, char *argv[]) {
+
+	srand(time(NULL));
 
 	/*********************************/
 	/*** Pruebas Lista Posicionada ***/
@@ -269,7 +273,6 @@ int main(int argc, char *argv[]) {
 	/*** Pruebas Algoritmos Lista Posicionada ***/
 	/********************************************/
 
-	/*
 	ListaPos<int> L;
 	ListaPos<int>::pos_t pos;
 
@@ -353,7 +356,18 @@ int main(int argc, char *argv[]) {
 	cout << "L1 - L2:" << endl;
 	Imprimir(L2);
 	cout << endl;
-	*/
+
+	L3.Vaciar();
+	for (int i = 0; i < 15; i++) {
+		int e = rand()%100 - 50;
+		L3.AgregarAlFinal(e);
+	}
+
+	cout << "Probando algoritmo Quicksort" << endl;
+	Imprimir(L3);
+	Quicksort(L3);
+	Imprimir(L3);
+	cout << endl;
 
 	/*****************************************/
 	/*** Pruebas Algoritmos Lista Indexada ***/
@@ -406,12 +420,30 @@ int main(int argc, char *argv[]) {
 	Imprimir(L);
 	cout << endl;
 
+	L2.Vaciar();
+	for (int i = 0; i < 15; i++) {
+		int e = rand()%100 - 50;
+		L2.Insertar(1, e);
+	}
+
 	cout << "Probando algoritmo Seleccion con Pila" << endl;
 	cout << "L es:" << endl;
-	Imprimir(L);
-	SeleccionPila(L);
+	Imprimir(L2);
+	SeleccionPila(L2);
 	cout << "Ordenada:" << endl;
-	Imprimir(L);
+	Imprimir(L2);
+	cout << endl;
+
+	ListaIndex<int> L3;
+	for (int i = 0; i < 15; i++) {
+		int e = rand()%100 - 50;
+		L3.Insertar(1, e);
+	}
+
+	cout << "Probando algoritmo Quicksort" << endl;
+	L3.Imprimir();
+	Quicksort(L3);
+	L3.Imprimir();
 	cout << endl;
 	*/
 
@@ -419,6 +451,8 @@ int main(int argc, char *argv[]) {
 	/*** Pruebas Algoritmos Lista Ordenada ***/
 	/*****************************************/
 
+	/*
+	{
 	ListaOrdenada<int> L, L2, L3;
 
 	L.Insertar(-5);
@@ -442,7 +476,6 @@ int main(int argc, char *argv[]) {
 	cout << endl;
 
 
-	/*
 	cout << "Probando algoritmo Copiar" << endl;
 	cout << "L1:" << endl;
 	L.Imprimir();
@@ -451,7 +484,6 @@ int main(int argc, char *argv[]) {
 	Copiar(L, L2);
 	cout << "Copia de L1 en L2" << endl;
 	L2.Imprimir();
-	*/
 
 
 	cout << "Probando algoritmo Eliminar" << endl;
@@ -462,6 +494,34 @@ int main(int argc, char *argv[]) {
 	Eliminar(L, L2);
 	cout << "L1 - L2: " << endl;
 	L.Imprimir();
+	cout << endl;
+
+	L3.Insertar(99);
+	L3.Insertar(77);
+
+	L.Insertar(29);
+	L.Insertar(41);
+	L.Insertar(17);
+	L2.Insertar(29);
+	L2.Insertar(41);
+	L2.Insertar(17);
+	cout << "Probando algoritmo Interseccion1" << endl;
+	cout << "L1:" << endl;
+	L.Imprimir();
+	cout << "L2:" << endl;
+	L2.Imprimir();
+	cout << "L3:" << endl;
+	L3.Imprimir();
+	cout << "L3 = L1 ∩ L2" << endl;
+	Interseccion1(L, L2, L3);
+	L3.Imprimir();
+	cout << endl;
+
+
+	} // Fin algoritmos lista ordenada
+	*/
+
+
 	return 0;
 }
 
