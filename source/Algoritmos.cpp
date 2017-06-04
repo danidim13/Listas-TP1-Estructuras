@@ -192,7 +192,7 @@ typename ListaPos<E>::pos_t __Partition(ListaPos<E> &L, typename ListaPos<E>::po
  * p (primera) hasta u (ultima).
  */
 template <typename E>
-typename ListaPos<E>::pos_t __Quicksort(ListaPos<E> &L, typename ListaPos<E>::pos_t p, typename ListaPos<E>::pos_t u){
+void __Quicksort(ListaPos<E> &L, typename ListaPos<E>::pos_t p, typename ListaPos<E>::pos_t u){
 
 	// Se elige el ultimo elemento de la sublista como
 	// el pivot.
