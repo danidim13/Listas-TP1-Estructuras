@@ -15,7 +15,7 @@ public:
 
     /*! Constructor por defecto.
      */
-    ListaIndex():array(new node_t[30]), max_elem(30), num_elem(0) {};
+    ListaIndex():array(new node_t[256]), max_elem(256), num_elem(0) {};
     ListaIndex(size_t m):array(new node_t[m]), max_elem(m), num_elem(0) {};
 
     /*! Destructor por defecto.
