@@ -7,10 +7,10 @@
 
 //#include "include/ListaPlantilla.h"
 
-//#include "include/Listas_LDE.h"
-//#warning "Usando implementacion con LDE!"
-#include "include/Listas_LSE.h"
-#warning "Usando implementacion con LSE!"
+#include "include/Listas_LDE.h"
+#warning "Usando implementacion con LDE!"
+//#include "include/Listas_LSE.h"
+//#warning "Usando implementacion con LSE!"
 //#include "include/Listas_Arreglo.h"
 //#warning "Usando implementacion con arreglo!"
 
@@ -47,7 +47,7 @@ void ImprimirReversa(ListaPos<E> L) {
 
 int main(int argc, char *argv[]) {
 
-	srand(time(NULL));
+	srand(1);
 
 	/*********************************/
 	/*** Pruebas Lista Posicionada ***/
@@ -274,8 +274,6 @@ int main(int argc, char *argv[]) {
 	/********************************************/
 
 	ListaPos<int> L;
-	ListaPos<int>::pos_t pos;
-
 
 	L.AgregarAlFinal(1);
 	L.AgregarAlFinal(4);
@@ -311,6 +309,17 @@ int main(int argc, char *argv[]) {
 	L3.AgregarAlFinal(6);
 	L3.AgregarAlFinal(7);
 
+	cout << "Probando algoritmo Sublista" << endl;
+	cout << "L1:" << endl;
+	Imprimir(L);
+	cout << "L2:" << endl;
+	Imprimir(L3);
+	if (Sublista(L,L3)) {
+		cout << "L2 es sublista de L1" << endl;
+	} else {
+		cout << "L2 NO es sublista de L1" << endl;
+	}
+	cout << endl;
 
 	cout << "Probando algoritmo Invertir" << endl;
 	cout << "L:" << endl;
@@ -321,9 +330,9 @@ int main(int argc, char *argv[]) {
 
 	cout << "Probando algoritmo Burbuja Doble" << endl;
 	cout << "L:" << endl;
-	Imprimir(L2);
-	BurbujaDoble(L2);
-	Imprimir(L2);
+	Imprimir(L);
+	BurbujaDoble(L);
+	Imprimir(L);
 	cout << endl;
 
 

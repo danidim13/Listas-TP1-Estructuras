@@ -1,8 +1,9 @@
 #ifndef __ALGORITMOS_H__
 #define __ALGORITMOS_H__
 
+#include "Listas_LDE.h"
 //#include "Listas_LSE.h"
-#include "Listas_LSE.h"
+//#include "Listas_Arreglo.h"
 
 /******************************************/
 /*** Algoritmos de la lista posicionada ***/
