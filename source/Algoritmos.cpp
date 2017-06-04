@@ -60,12 +60,6 @@ void BurbujaDoble(ListaPos<E> &L1){
 	sig = L1.Siguiente(it);
 	
 	int pasada = 1;
-	//FIXME
-	//El algoritmo se está saliendo de los limites
-	//de la lista
-	//std::cout << std::endl;
-	//std::cout << "Iniciando Burbuja doble" << std::endl;
-	//Imprimir(L1);
 	while (L1.NumElem() - (2*pasada) >= 0 ){
 
 		//std::cout << "Pasada " << pasada << std::endl;
@@ -162,6 +156,73 @@ void SeleccionPila(ListaPos<E> &L){
 	}
 }
 
+
+/*! Funcion auxiliar para Quicksort
+ */
+template <typename E>
+typename ListaPos<E>::pos_t __Partition(ListaPos<E> &L, typename ListaPos<E>::pos_t p, typename ListaPos<E>::pos_t u, E pivot){
+
+	typename ListaPos<E>::pos_t lo, hi;
+	lo = p;
+	hi = u;
+
+	bool menores = true;
+	while (lo != hi) {
+		if (menores) {
+			if (L.Recuperar(lo) > pivot) {
+				L.Intercambiar(lo, hi);
+				menores = false;
+			} else {
+				lo = L.Siguiente(lo);
+			}
+		} else {
+			if (L.Recuperar(hi) < pivot) {
+				L.Intercambiar(hi, lo);
+				menores = true;
+			} else {
+				hi = L.Anterior(hi);
+			}
+		}
+	}
+	return menores ? lo : hi;
+}
+
+/*! Funcion recursiva para quicksort
+ * Ordena recursivamente la Sublista desde la posicion
+ * p (primera) hasta u (ultima).
+ */
+template <typename E>
+typename ListaPos<E>::pos_t __Quicksort(ListaPos<E> &L, typename ListaPos<E>::pos_t p, typename ListaPos<E>::pos_t u){
+
+	// Se elige el ultimo elemento de la sublista como
+	// el pivot.
+	E pivot = L.Recuperar(u);
+	typename ListaPos<E>::pos_t q, next_p, next_u;
+
+	// q es la posicion final del pivot
+	q = __Partition(L, p, u, pivot);
+
+	// Luego se deben ordenar sublistas L[p : q-1] y L[q+1 : u]
+
+	// next_u es q-1
+	next_u = L.Anterior(q);
+
+	// next_p es q+1
+	next_p = L.Siguiente(q);
+
+	if (!(p == q || p == next_u)) {
+		__Quicksort(L, p, next_u);
+	}
+	if (!(u == q || u == next_p)) {
+		__Quicksort(L, next_p, u);
+	}
+}
+
+template <typename E>
+void Quicksort(ListaPos<E> &L){
+	if (!L.Vacia())
+		__Quicksort(L, L.Primera(), L.Ultima());
+}
 
 template <typename E>
 void UnionDesord(ListaPos<E> &L1, ListaPos<E> &L2){
@@ -386,6 +447,88 @@ void SeleccionPila(ListaIndex<E> &L){
 	}
 }
 
+/*! Funcion auxiliar para Quicksort
+ */
+template <typename E>
+int __Partition(ListaIndex<E> &L, int p, int u, E pivot){
+
+	int lo = p;
+	int hi = u;
+
+
+	// Indica si se itera sobre los elementos menores al
+	// pivot o los mayores 
+	bool menores = true;
+	while (lo < hi) {
+		if (menores) {
+			// hi apunta al pivot, mientras que lo itera sobre
+			// los elementos que deberian ser menores al pivot
+
+			if (L.Recuperar(lo) > pivot) {
+				// Si se encuentra un elemento mayor al pivot
+				// se intercambian de posicion.
+				L.Intercambiar(lo, hi);
+				menores = false;
+			} else {
+				lo++;
+			}
+		} else {
+			// lo apunta al pivot mientras que hi itera
+			// sobre los elementos que deberian ser mayores
+			if (L.Recuperar(hi) < pivot) {
+				L.Intercambiar(hi, lo);
+				menores = true;
+			} else {
+				hi--;
+			}
+		}
+		// El loop acaba cuando los indices se encuentran
+	}
+	return menores ? hi : lo;
+}
+
+/*! Funcion recursiva para Quicksort.
+ * Ordena la sublista L[p:u] mediante el algoritmo quicksort
+ * p es el primer indice y u el ultimo.
+ */
+template <typename E>
+void __Quicksort(ListaIndex<E> &L, int p, int u){
+
+	// Condicion de parada
+	if (p >= u)
+		return;
+
+	// Siempre elegimos el elemento más a la derecha
+	// de pivot.
+	E pivot = L.Recuperar(u);
+
+	// El algoritmo Partition acomoda la sublista tal que
+	// todos los elementos queden en su posicion correcta
+	// respecto al pivot (menores a la izquierda, mayores
+	// a la derecha).
+	
+	//cout << "Particionando L con pivot " << pivot;
+	//cout << " desde " << p << " hasta " << u << endl;
+
+	//cout << "Antes: " << endl;
+	//L.Imprimir();
+	int q = __Partition(L, p, u, pivot);
+	// q es la posicion final del pivot,  en este punto
+	// este elemento ya se encuentra en su posicion correcta
+	//cout << "Despues: " << endl;
+	//L.Imprimir();
+	//cout << endl; 
+
+	// Se llama recursivamente a quicksort sobre los elementos
+	// a ambos lados del pivot.
+	__Quicksort(L, p, q-1);
+	__Quicksort(L, q+1, u);
+}
+template <typename E>
+void Quicksort(ListaIndex<E> &L){
+	__Quicksort(L, 1, L.NumElem());
+}
+
 /***************************************/
 /*** Algoritmos de la lista ordenada ***/
 /***************************************/
@@ -415,15 +558,57 @@ void Eliminar(ListaOrdenada<E> &L1, ListaOrdenada<E> &L2){
 		return;
 
 	E elem2 = L2.Primero();
+	E max_elem1 = L1.Ultimo();
 	while (true) {
 		//cout << "elem = " << elem2 << endl;
 		L1.Borrar(elem2);
-		if (elem2 == L2.Ultimo() || L1.Vacia()) {
+		if (elem2 == L2.Ultimo() || L1.Vacia() || elem2 >= max_elem1) {
 			break;
 		} else {
 			elem2 = L2.Siguiente(elem2);
 		}
 	}
+}
+
+template <typename E>
+void Interseccion1(ListaOrdenada<E> &L1, ListaOrdenada<E> &L2, ListaOrdenada<E> &L3){
+
+	L3.Vaciar();
+	if (L1.Vacia() || L2.Vacia())
+		return;
+
+	E elem1, elem2, ult1, ult2;
+
+	elem1 = L1.Primero();
+	ult1 = L1.Ultimo();
+
+	elem2 = L2.Primero();
+	ult2 = L2.Ultimo();
+
+	while (true) {
+		if (elem1 == elem2) {
+			L3.Insertar(elem1);
+			if (elem1 == ult1 || elem2 == ult2) {
+				break;
+			} else {
+				elem1 = L1.Siguiente(elem1);
+				elem2 = L2.Siguiente(elem2);
+			}
+		} else if (elem1 < elem2) {
+			if (elem1 == ult1) {
+				break;
+			} else {
+				elem1 = L1.Siguiente(elem1);
+			}
+		} else if (elem1 > elem2) {
+			if (elem2 == ult2) {
+				break;
+			} else {
+				elem2 = L2.Siguiente(elem2);
+			}
+		}
+	}
+
 }
 
 /***************************/
@@ -435,6 +620,7 @@ template bool Sublista<int>(ListaPos<int> &L1, ListaPos<int> &L2);
 template void BurbujaDoble<int>(ListaPos<int> &L1);
 template void Imprimir<int>(ListaPos<int> &L);
 template void SeleccionPila<int>(ListaPos<int> &L);
+template void Quicksort<int>(ListaPos<int> &L);
 template void UnionDesord<int>(ListaPos<int> &L1, ListaPos<int> &L2);
 template void Eliminar<int>(ListaPos<int> &L1, ListaPos<int> &L2);
 
@@ -448,9 +634,11 @@ template bool Sublista<int>(ListaIndex<int> &L1, ListaIndex<int> &L2);
 template void BurbujaDoble<int>(ListaIndex<int> &L1);
 template void Imprimir<int>(ListaIndex<int> &L);
 template void SeleccionPila<int>(ListaIndex<int> &L);
+template void Quicksort<int>(ListaIndex<int> &L);
 
 /********************************/
 /*** Instancias ListaOrdenada ***/
 /********************************/
 template void Copiar<int>(ListaOrdenada<int> &L1, ListaOrdenada<int> &L2);
 template void Eliminar<int>(ListaOrdenada<int> &L1, ListaOrdenada<int> &L2);
+template void Interseccion1<int>(ListaOrdenada<int> &L1, ListaOrdenada<int> &L2, ListaOrdenada<int> &L3);

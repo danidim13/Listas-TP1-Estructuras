@@ -18,16 +18,19 @@ template <typename E>
 void BurbujaDoble(ListaPos<E> &L1);
 
 template <typename E>
-void Imprimir(ListaPos<E> L);
+void SeleccionPila(ListaPos<E> &L);
 
 template <typename E>
-void SeleccionPila(ListaPos<E> &L);
+void Quicksort(ListaPos<E> &L);
 
 template <typename E>
 void UnionDesord(ListaPos<E> &L1, ListaPos<E> &L2);
 
 template <typename E>
 void Eliminar(ListaPos<E> &L1, ListaPos<E> &L2);
+
+template <typename E>
+void Imprimir(ListaPos<E> &L);
 
 
 /***************************************/
@@ -47,6 +50,9 @@ void Imprimir(ListaIndex<E> &L);
 
 template <typename E>
 void SeleccionPila(ListaIndex<E> &L);
+
+template <typename E>
+void Quicksort(ListaIndex<E> &L);
 
 template <typename E>
 void UnionDesord(ListaIndex<E> &L1, ListaIndex<E> &L2);
